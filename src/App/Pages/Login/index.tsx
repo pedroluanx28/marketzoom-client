@@ -1,4 +1,5 @@
 import { useFormik } from 'formik'
+import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom'
 import * as Yup from "yup"
 import { Button, Form } from 'react-bootstrap'
@@ -7,7 +8,6 @@ import { Button, Form } from 'react-bootstrap'
 import imageLogo from "../../../Assets/Logo.png"//deve ser alterado o caminho
 
 import './style.scss'
-import Swal from 'sweetalert2'
 
 const validation = Yup.object().shape({
     username: Yup.string().required('Campo obrigatório*'),
