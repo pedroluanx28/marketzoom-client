@@ -2,7 +2,10 @@ import { useFormik } from 'formik'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom'
 import * as Yup from "yup"
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 import imageLogo from "../../../Assets/Logo.png"//deve ser alterado o caminho
 
