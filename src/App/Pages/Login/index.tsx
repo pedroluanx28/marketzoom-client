@@ -2,8 +2,7 @@ import { useFormik } from 'formik'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router-dom'
 import * as Yup from "yup"
-import { Button, Form } from 'react-bootstrap'
-// import { useLocation } from 'react-router-dom';
+import { Button, Col, Form, Row } from 'react-bootstrap'
 
 import imageLogo from "../../../Assets/Logo.png"//deve ser alterado o caminho
 
@@ -15,14 +14,13 @@ const validation = Yup.object().shape({
 })
 
 export function Login() {
-    // const localizacao = useLocation();
     const formik = useFormik({
-        initialValues:{
+        initialValues: {
             username: '',
             password: ''
         },
         validationSchema: validation,
-        onSubmit: (values) =>{
+        onSubmit: (values) => {
             Swal.fire({
                 icon: 'info',
                 text: 'Parabens'
@@ -34,29 +32,45 @@ export function Login() {
         <div className='login-container d-flex'>
             <div className='w-50 h-100 d-flex justify-content-center align-items-center'>
                 <Form className='d-flex flex-column gap-3 px-5 py-3 rounded rounded-4 background-filter' onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
-                    <section>
-                        <img src={imageLogo} alt="logomarketzoom" />
-                    </section>
-                    <section className='d-flex flex-column gap-1'>
-                        <label htmlFor="username">Nome de usuário:</label>
-                        <input type='text' name='username' placeholder='Seu nome de usuário' id='username' />
-                        {formik.errors.username && (
-                            <div className='text-danger'>{formik.errors.username}</div>
-                        )}
-                    </section>
-                    <section className='d-flex flex-column gap-1'>
-                        <label htmlFor="userpassword">Senha:</label>
-                        <input type='password' name='password' placeholder='************' id='userpassword' />
-                        {formik.errors.password && (
-                            <div className='text-danger'>{formik.errors.password}</div>
-                        )}
-                    </section>
-                    <section>
-                        <Button className='w-100' type='submit'>Login</Button>
-                    </section>
-                    <section>
-                        Não tem uma conta?<Link to={'/cadastro'}>Cadastre-se</Link>
-                    </section>
+                    <Row>
+                        <Col>
+                            <img src={imageLogo} alt="logomarketzoom" />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className='d-flex flex-column'>
+                            <label htmlFor="username">Nome de usuário:</label>
+
+                            <input className='form-control' type='text' name='username' placeholder='Seu nome de usuário' id='username' />
+                            {formik.errors.username && (
+                                <div className='text-danger'>{formik.errors.username}</div>
+                            )}
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className='d-flex flex-column'>
+                            <label htmlFor="userpassword">Senha:</label>
+
+                            <input className='form-control' type='password' name='password' placeholder='************' id='userpassword' />
+                            {formik.errors.password && (
+                                <div className='text-danger'>{formik.errors.password}</div>
+                            )}
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className='d-flex flex-column'>
+                            <Button className='w-100' type='submit'>Login</Button>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className='text-center'>
+                            Não tem uma conta?<Link to={'/cadastro'}>Cadastre-se</Link>
+                        </Col>
+                    </Row>
                 </Form>
             </div>
             <div></div>
