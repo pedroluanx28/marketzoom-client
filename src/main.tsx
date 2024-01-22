@@ -4,7 +4,7 @@ import { AppRoutes } from './App/Routes/AppRoutes';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './global.scss'
+import './global.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

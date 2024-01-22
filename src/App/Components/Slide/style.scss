@@ -1,0 +1,14 @@
+div.swiper-button-prev,
+div.swiper-button-next {
+   position: absolute;
+
+}
+
+.swiper-button-prev::after {
+    content: url('../../../Assets/arrow.png');
+}
+
+.swiper-button-next::after {
+    content: url('../../../Assets/arrow.png');
+    transform: rotate(180deg);
+}

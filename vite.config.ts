@@ -10,4 +10,13 @@ export default defineConfig({
   server: {
     open: true,
   }
+  build:{
+    rollupOptions:{
+      output:{
+        globals:{
+          css: "./style.scss"
+        }
+      }
+    }
+  }
 })
