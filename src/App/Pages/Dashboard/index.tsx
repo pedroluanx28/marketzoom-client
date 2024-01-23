@@ -1,12 +1,18 @@
 import { ListOfertas } from "@/Components/Ofertas";
-import { Card } from "react-bootstrap";
+import { Slide } from "@/Components/Slide";
 
 export function Dashboard() {
     return (
-        <div style={{ height: "100vh", width: "100vw" }}>
-            <Card className="h-75">
-                <ListOfertas/>
-            </Card>
+        <div style={{ height: "100vh" }}>
+            <header style={{ height: "12%" }}>
+                ajshdjas
+            </header>
+            <div className="d-flex flex-column gap-2" style={{ height: "88%" }}>
+                <div style={{ height: "55%" }}>
+                    <Slide />
+                </div>
+                <ListOfertas />
+            </div>
         </div>
     )
 }

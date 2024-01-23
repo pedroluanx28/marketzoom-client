@@ -19,7 +19,7 @@ export function CardOfertas({title,image,span,link,button}: Props) {
             <h4>{title}</h4>
             <img src={Bag} alt={image} className="imagem-ofertas" />
             <span className="text-center">{span}</span>
-            <Button><Link to={link}>{button}</Link></Button>
+            <Button><Link to={link} className="text-white">{button}</Link></Button>
         </Card>
     )
 }

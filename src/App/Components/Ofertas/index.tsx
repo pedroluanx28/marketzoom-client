@@ -29,7 +29,7 @@ const mock = [
 
 export function ListOfertas() {
     return (
-        <div className="d-flex">
+        <div style={{ height: "42%" }} className="d-flex justify-content-around">
             {mock?.map((item) => (
                 <CardOfertas title={item.title} span={item.span} link={item.link} button={item.button} />
             ))}
