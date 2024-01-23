@@ -4,9 +4,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: "Poppins";
 }
-
 .btn-bg-purple-text-white {
     background-color: #4249d1b3 !important;
     color: #fff !important;
@@ -14,4 +12,11 @@
 
 .h-100vh {
     height: 100vh !important;
+}
+a {
+    text-decoration: none;
+}
+
+.height-85 {
+    height: 85%;
 }
