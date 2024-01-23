@@ -1,4 +1,4 @@
-import { ListOfertas } from "@/Components/Ofertas";
+import { ListOffers } from "@/Components/Ofertas";
 import { Slide } from "@/Components/Slide";
 
 export function Dashboard() {
@@ -8,10 +8,10 @@ export function Dashboard() {
                 ajshdjas
             </header>
             <div className="d-flex flex-column gap-2" style={{ height: "88%" }}>
-                <div style={{ height: "55%" }}>
+                <div style={{ height: "55%", padding: "0 3rem" }}>
                     <Slide />
                 </div>
-                <ListOfertas />
+                <ListOffers />
             </div>
         </div>
     )

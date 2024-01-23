@@ -1,8 +1,8 @@
 import { useFormik } from 'formik'
 import Swal from 'sweetalert2'
+import { FormInput } from '@/Components/FormInput';
 import { Link } from 'react-router-dom'
 import * as Yup from "yup"
-import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -43,9 +43,7 @@ export function Login() {
 
                     <Row>
                         <Col className='d-flex flex-column'>
-                            <label htmlFor="username">Nome de usuário:</label>
-
-                            <input className='form-control' type='text' name='username' placeholder='Seu nome de usuário' id='username' />
+                            <FormInput label='Nome de usuário:' type='text' name='username' placeholder='Seu nome de usuário' id='username' />
                             {formik.errors.username && (
                                 <div className='text-danger'>{formik.errors.username}</div>
                             )}
@@ -54,9 +52,7 @@ export function Login() {
 
                     <Row>
                         <Col className='d-flex flex-column'>
-                            <label htmlFor="userpassword">Senha:</label>
-
-                            <input className='form-control' type='password' name='password' placeholder='************' id='userpassword' />
+                            <FormInput label='Senha:' type='password' name='password' placeholder='************' id='userpassword' />
                             {formik.errors.password && (
                                 <div className='text-danger'>{formik.errors.password}</div>
                             )}
@@ -65,13 +61,13 @@ export function Login() {
 
                     <Row>
                         <Col className='d-flex flex-column'>
-                            <Button className='w-100' type='submit'>Login</Button>
+                            <button className='btn w-100 btn-bg-purple-text-white' type='submit'>Login</button>
                         </Col>
                     </Row>
 
                     <Row>
                         <Col className='text-center'>
-                            Não tem uma conta?<Link to={'/cadastro'}>Cadastre-se</Link>
+                            Não tem uma conta?<Link to={'/register'}>Cadastre-se</Link>
                         </Col>
                     </Row>
                 </Form>

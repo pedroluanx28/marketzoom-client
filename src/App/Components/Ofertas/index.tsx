@@ -1,4 +1,4 @@
-import { CardOfertas } from "./Card"
+import { CardOffers } from "./Card"
 
 const mock = [
     {
@@ -27,11 +27,11 @@ const mock = [
     }
 ]
 
-export function ListOfertas() {
+export function ListOffers() {
     return (
         <div style={{ height: "42%" }} className="d-flex justify-content-around">
             {mock?.map((item) => (
-                <CardOfertas title={item.title} span={item.span} link={item.link} button={item.button} />
+                <CardOffers title={item.title} span={item.span} link={item.link} button={item.button} />
             ))}
         </div>
     )
