@@ -46,6 +46,7 @@ export function Register() {
                             <input type="password" className="input-border-purple" />
                         </div>
                         <button className="btn btn-bg-purple-text-white w-100">Criar</button>
+                        <span>Já tem uma conta? <a href="/login">Realize o login</a></span>
                     </Form>
                 </div>
             </div>
