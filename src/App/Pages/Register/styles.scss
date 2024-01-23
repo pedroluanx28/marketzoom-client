@@ -1,0 +1,24 @@
+.image {
+    background-image: url('https://correio-cdn1.cworks.cloud/fileadmin/_processed_/d/4/csm_ney_careca_14e69a85fd.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.image-man {
+    background-image: url('../../../Assets/homem.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(10px);
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.purple-link {
+    color: #656ED3;
+    text-decoration: none;
+}
