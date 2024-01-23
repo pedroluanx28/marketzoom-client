@@ -7,4 +7,16 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: '/src/App' }],
   },
+  server: {
+    open: true,
+  }
+  build:{
+    rollupOptions:{
+      output:{
+        globals:{
+          css: "./style.scss"
+        }
+      }
+    }
+  }
 })
