@@ -4,7 +4,23 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
 }
+  
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: rgb(159, 159, 171);
+    border-radius: 20px;
+    border: 3px solid transparent;
+  }
 .btn-bg-purple-text-white {
     background-color: #4249d1b3 !important;
     color: #fff !important;
