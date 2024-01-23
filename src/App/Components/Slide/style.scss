@@ -6,13 +6,11 @@ div.swiper-button-next {
 
 .swiper-button-prev::after {
     content: url('../../../Assets/arrow.png');
-    background-color: red;
 }
 
 .swiper-button-next::after {
     content: url('../../../Assets/arrow.png');
     transform: rotate(180deg);
-    background-color: red;
 }
 
 img{
