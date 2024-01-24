@@ -5,14 +5,14 @@ import './styles.scss';
 
 export function Header() {
     return (
-        <div className="bg-transparent d-flex justify-content-between align-items-center header-border px-4">
+        <div className="bg-header d-flex justify-content-between align-items-center header-border px-4">
             <a href="/">
-                <img src="./Logo.svg" alt="Image Logo" className="image-logo" />
+                <img src="Logo.svg" alt="Image Logo" className="image-logo" />
             </a>
             <div className="d-flex align-items-center gap-5">
                 <SearchInput />
                 <div className="d-flex align-items-center gap-2">
-                    <a href="/cart" className="text-decoration-none">
+                    <a href="/user/cart" className="text-decoration-none">
                         <div className="position-relative">
                             <BsCart3 className="fs-3" />
                             <label className="label-cart">3</label>
@@ -23,7 +23,7 @@ export function Header() {
                         <span className="cart-span cart-price">R$ 57,99</span>
                     </div>
                 </div>
-                <a href="/login">
+                <a href="/auth/login">
                     <button className="btn button-header">Faça seu login</button>
                 </a>
             </div>
