@@ -7,8 +7,6 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-import imageLogo from "../../../Assets/Logo.png"//deve ser alterado o caminho
-
 import './style.scss'
 
 const validation = Yup.object().shape({
@@ -37,7 +35,7 @@ export function Login() {
                 <Form className='d-flex flex-column gap-3 px-5 py-3 rounded rounded-4 background-filter' onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
                     <Row>
                         <Col>
-                            <img src={imageLogo} alt="logomarketzoom" />
+                            <img src="./Logo.png" alt="logomarketzoom" />
                         </Col>
                     </Row>
 
