@@ -7,7 +7,7 @@ export function Header() {
     return (
         <div className="bg-header d-flex justify-content-between align-items-center header-border px-4">
             <a href="/">
-                <img src="Logo.svg" alt="Image Logo" className="image-logo" />
+                <img src="./Logo.svg" alt="Image Logo" className="image-logo" />
             </a>
             <div className="d-flex align-items-center gap-5">
                 <SearchInput />
