@@ -22,7 +22,7 @@ export function Register() {
             <div className="w-50 d-flex align-items-center justify-content-center flex-column h-100vh image">
                 <div className="backdrop-blur p-4">
                     <div className="mx-5">
-                        <img src="./Logo.png" alt="Logo do marketzoom" />
+                        <img src="./Logo.svg" alt="Logo do marketzoom" />
                     </div>
                     <Form onSubmit={formik.handleSubmit} onChange={formik.handleChange}>
                         <div>
@@ -42,7 +42,7 @@ export function Register() {
                         </div>
                         <button className="btn btn-bg-purple-text-white mt-3 mb-2 w-100">Criar</button>
                         <div className="text-center">
-                        <span>Já tem uma conta? <a href="/login" className="purple-link">Realize o login</a></span>
+                        <span>Já tem uma conta? <a href="/auth/login" className="purple-link">Realize o login</a></span>
                         </div>
                     </Form>
                 </div>
