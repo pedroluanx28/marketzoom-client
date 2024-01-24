@@ -1,16 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import { Dashboard } from "@/Pages/Dashboard";
-import { Register } from "@/Pages/Register";
-import { Login } from "@/Pages/Login";
+import { AuthRoutes } from "./AuthRoutes";
+import { MainRoutes } from "./MainRoutes";
+import { PrivateRoutes } from "./PrivateRoutes";
 
 export function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />}/>
+                <Route path="/*" element={<MainRoutes />} />
+                <Route path="/user/*" element={<PrivateRoutes />} />
+                <Route path="/auth/*" element={<AuthRoutes />} />
             </Routes>
         </BrowserRouter>
     )

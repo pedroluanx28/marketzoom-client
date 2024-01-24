@@ -35,7 +35,7 @@ export function Login() {
                 <Form className='d-flex flex-column gap-3 px-5 py-3 rounded rounded-4 background-filter' onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
                     <Row>
                         <Col>
-                            <img src="./Logo.png" alt="logomarketzoom" />
+                            <img src="./Logo.svg" alt="logomarketzoom" />
                         </Col>
                     </Row>
 
@@ -65,7 +65,7 @@ export function Login() {
 
                     <Row>
                         <Col className='text-center'>
-                            Não tem uma conta?<Link to={'/register'}>Cadastre-se</Link>
+                            Não tem uma conta?<Link to={'/auth/register'}>Cadastre-se</Link>
                         </Col>
                     </Row>
                 </Form>
