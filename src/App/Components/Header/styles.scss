@@ -1,0 +1,40 @@
+.image-logo {
+    width: 15rem;
+}
+
+.cart-span {
+    font-size: 13px;
+}
+
+.cart-price {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.header-border {
+    border-bottom: 1px solid #fff;
+}
+
+.button-header {
+    font-weight: 600 !important;
+    border: 1px solid #12112733 !important;
+    padding: 7px 23px !important;
+}
+
+.label-cart {
+    position: absolute;
+    top: -7px;
+    right: -3px;
+    height: 18px;
+    width: 18px;
+    text-align: center;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4249d1;
+    border: 1px solid #fff;
+}

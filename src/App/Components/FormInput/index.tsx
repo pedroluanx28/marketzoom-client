@@ -5,6 +5,9 @@ type FormInputProps = {
     inputClassName?: string;
     labelClassName?: string;
     type?: string;
+    name?: string;
+    placeholder?: string;
+    id?: string;
 }
 
 export function FormInput({

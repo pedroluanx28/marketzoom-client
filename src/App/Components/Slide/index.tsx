@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/scss/navigation';
@@ -18,15 +17,17 @@ export function Slide() {
             navigation
             loop
             autoplay={{
-                delay: 1500,
+                delay: 3500,
                 disableOnInteraction: false,
             }}
             pagination={{ clickable: true }}
-            className='h-50'
+            className='h-100 d-flex'
         >
-            <SwiperSlide>Slide 1</SwiperSlide>
+            <SwiperSlide><img src="./Logo.svg"/></SwiperSlide>
             <SwiperSlide>Slide 2</SwiperSlide>
+            <SwiperSlide><img src="./Logo.svg"/></SwiperSlide>
             <SwiperSlide>Slide 3</SwiperSlide>
+            <SwiperSlide><img src="./Logo.svg"/></SwiperSlide>
             <SwiperSlide>Slide 4</SwiperSlide>
         </Swiper>
     );
