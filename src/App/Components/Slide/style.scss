@@ -5,11 +5,11 @@ div.swiper-button-next {
 }
 
 .swiper-button-prev::after {
-    content: url('../../../Assets/arrow.png');
+    content: url('./arrow.png');
 }
 
 .swiper-button-next::after {
-    content: url('../../../Assets/arrow.png');
+    content: url('./arrow.png');
     transform: rotate(180deg);
 }
 
