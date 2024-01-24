@@ -22,6 +22,11 @@
   border: 3px solid transparent;
 }
 
+.btn-bg-white-text-purple {
+  background-color: #fff !important;
+  color: #4249d1b3 !important;
+}
+
 .btn-bg-purple-text-white {
   background-color: #4249d1b3 !important;
   color: #fff !important;
@@ -35,7 +40,18 @@ a {
   text-decoration: none;
   color: unset;
 }
-
+.background-filter{
+  background-color: transparent;
+  backdrop-filter: blur(30px);
+}
 .height-85 {
   height: 85%;
+}
+
+.w-85{
+  width: 85%;
+}
+
+.blur{
+  backdrop-filter: blur(15px);
 }
