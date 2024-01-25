@@ -4,25 +4,25 @@ const mock = [
     {
         "title": "Volta às aulas",
         "span": "Explore nossas promoções  de materiais escolar",
-        "link": "#",
+        "link": "/products",
         "button": "Mostrar produtos"
     },
     {
         "title": "Mais vendidos",
         "span": "Confira os produtos que são tendências",
-        "link": "#",
+        "link": "products",
         "button": "Ir para mais vendidos"
     },
     {
         "title": "Menos de R$100",
         "span": "Confira produtos com preços baixos",
-        "link": "#",
+        "link": "products",
         "button": "Mostrar produtos"
     },
     {
         "title": "Nossas categorias",
         "span": "Encontre imóveis, roupas e muito mais!",
-        "link": "#",
+        "link": "products",
         "button": "Ir para categiorias"
     }
 ]

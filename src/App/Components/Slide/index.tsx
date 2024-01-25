@@ -23,12 +23,16 @@ export function Slide() {
             pagination={{ clickable: true }}
             className='h-100 d-flex'
         >
-            <SwiperSlide><img src="./Logo.svg"/></SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide><img src="./Logo.svg"/></SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide><img src="./Logo.svg"/></SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
+            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
+            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
+            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
+            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
+            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
+            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
+            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
+            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
+            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
+            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
         </Swiper>
     );
 }
