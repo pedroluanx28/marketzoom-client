@@ -24,6 +24,12 @@ $bg-color: #4249d1b3;
   border: 3px solid transparent;
 }
 
+.div-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to right, #7db7ce, #fedbfb);
+}
+
 .bg-market {
   background-color: $bg-color;
 }
@@ -68,6 +74,14 @@ a {
   width: 85%;
 }
 
+.h-65 {
+  height: 65%;
+}
+
+.h-35 {
+  height: 35%;
+}
+
 .blur {
   backdrop-filter: blur(15px);
 }
@@ -81,7 +95,18 @@ a {
 }
 
 button:disabled,
-button[disabled]{
+button[disabled] {
   border: none;
   background-color: transparent;
+}
+
+.hover-scale {
+  transition: 300ms;
+}
+
+.hover-scale:hover {
+  transform: scale(1.09);
+}
+.h-88{
+  height: 88%;
 }

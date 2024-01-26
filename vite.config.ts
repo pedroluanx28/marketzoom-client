@@ -5,15 +5,18 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: [{ find: '@', replacement: '/src/App' }],
+    alias: [
+      { find: '@', replacement: '/src/App' },
+      { find: '@public', replacement: '/public' },
+    ],
   },
   server: {
     open: true,
   },
-  build:{
-    rollupOptions:{
-      output:{
-        globals:{
+  build: {
+    rollupOptions: {
+      output: {
+        globals: {
           css: "./style.scss"
         }
       }

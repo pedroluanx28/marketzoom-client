@@ -1,13 +1,14 @@
 import { SearchInput } from '@/Components/SearchInput';
 import { BsCart3 } from "react-icons/bs";
+import Logo from "@public/Logo.png";
 
 import './styles.scss';
 
 export function Header() {
     return (
-        <div className="bg-header d-flex justify-content-between align-items-center header-border px-4">
+        <div className="header d-flex justify-content-between align-items-center header-border px-4">
             <a href="/">
-                <img src="./Logo.svg" alt="Image Logo" className="image-logo" />
+                <img src={Logo} alt="Image Logo" className="image-logo" />
             </a>
             <div className="d-flex align-items-center gap-5">
                 <SearchInput />

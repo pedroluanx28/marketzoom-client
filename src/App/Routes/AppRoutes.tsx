@@ -5,12 +5,14 @@ import { PrivateRoutes } from "./PrivateRoutes";
 
 export function AppRoutes() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/*" element={<MainRoutes />} />
-                <Route path="/user/*" element={<PrivateRoutes />} />
-                <Route path="/auth/*" element={<AuthRoutes />} />
-            </Routes>
-        </BrowserRouter>
+        <div className="div-container">
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/*" element={<MainRoutes />} />
+                    <Route path="/user/*" element={<PrivateRoutes />} />
+                    <Route path="/auth/*" element={<AuthRoutes />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
     )
 }
