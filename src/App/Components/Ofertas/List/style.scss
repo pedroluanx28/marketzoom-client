@@ -1,0 +1,28 @@
+.title-more-see {
+    width: 1.1rem;
+    height: 2.2rem;
+    background-color: #454deab3;
+    border-radius: 5px;
+}
+
+.list-products::-webkit-scrollbar {
+    width: 2px;
+    height: 7px;
+    border-radius: 20px;
+}
+
+.list-products::-webkit-scrollbar-track {
+    background: #454deab3;
+}
+
+.list-products::-webkit-scrollbar-thumb {
+    background: #0a15f2b3;
+    border-radius: 12px;
+    border: 3px solid #636af44f;
+}
+
+.position-arrow-scroll{
+    position: absolute;
+    top: 0% !important;
+    right: 3% !important;
+}

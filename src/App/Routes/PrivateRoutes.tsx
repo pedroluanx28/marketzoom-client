@@ -8,6 +8,7 @@ export function PrivateRoutes() {
             <Header />
             <Routes>
                 <Route path="cart" element={<Cart />} />
+                <Route path="profile" element={<>Profile</>} />
             </Routes>
         </>
     )

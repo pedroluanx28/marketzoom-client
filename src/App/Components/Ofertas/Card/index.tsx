@@ -13,7 +13,7 @@ type Props = {
 
 export function CardOffers({title,image,span,link,button}: Props) {
     return (
-        <Card className="card-ofertas d-flex flex-column justify-content-between align-items-center teste">
+        <Card className="card-ofertas d-flex flex-column justify-content-between align-items-center teste  bg-offers">
             <h4>{title}</h4>
             <img src="./bag.svg" alt={image} className="imagem-ofertas" />
             <span className="text-center">{span}</span>

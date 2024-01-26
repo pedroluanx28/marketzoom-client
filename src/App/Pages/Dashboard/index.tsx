@@ -1,5 +1,6 @@
 import { ListOffers } from "@/Components/Ofertas";
 import { Slide } from "@/Components/Slide";
+import { Products } from "@/Components/Ofertas/List";
 
 import "./style.scss"
 
@@ -11,6 +12,7 @@ export function Dashboard() {
                 <Slide />
             </div>
             <ListOffers />
+            <Products/>
         </div >
     )
 }

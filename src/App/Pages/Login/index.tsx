@@ -6,6 +6,7 @@ import * as Yup from "yup"
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Logo from '@public/Logo.svg';
 
 import './style.scss'
 
@@ -35,7 +36,7 @@ export function Login() {
                 <Form className='d-flex flex-column gap-3 px-5 py-3 rounded rounded-4 background-filter' onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
                     <Row>
                         <Col>
-                            <img src="./Logo.svg" alt="logomarketzoom" />
+                            <img src={Logo} alt="logomarketzoom" />
                         </Col>
                     </Row>
 

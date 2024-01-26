@@ -1,4 +1,5 @@
 import { CardProduct } from "@/Components/Cards/CardProducts";
+import Row from 'react-bootstrap/Row';
 import { useParams } from "react-router-dom";
 
 export function ProductsList() {
@@ -17,7 +18,7 @@ export function ProductsList() {
         {
             id: 2,
             avaliacao: [5, 5, 5, 5, 5],
-            avaliacoes: 5,
+            avaliacoes: 2,
             nome: "IPHONE PROO PLUS MAX",
             descrição: "Compre e se arrependa, pois ele quebra",
             preco: 120.00,
@@ -26,7 +27,7 @@ export function ProductsList() {
         {
             id: 3,
             avaliacao: [5, 5, 5, 5, 5],
-            avaliacoes: 5,
+            avaliacoes: 4.4,
             nome: "IPHONE PROO PLUS MAX",
             descrição: "Compre e se arrependa, pois ele quebra",
             preco: 120.00,
@@ -44,7 +45,7 @@ export function ProductsList() {
         {
             id: 5,
             avaliacao: [5, 5, 5, 5, 5],
-            avaliacoes: 5,
+            avaliacoes: 0.8,
             nome: "IPHONE PROO PLUS MAX",
             descrição: "Compre e se arrependa, pois ele quebra",
             preco: 120.00,
@@ -56,25 +57,11 @@ export function ProductsList() {
             {search && (
                 <>Resultados para "{search}"</>
             )}
-            <div className="d-flex flex-wrap gap-5 justify-content-evenly py-4">
-                {!search ? (
-                    <>
-                        {mock.map((product) => (
-                            <a href={`/product/${product.id}`}>
-                                <CardProduct product={product} />
-                            </a>
-                        ))}
-                    </>
-                ) : (
-                    <>
-                        {mock.filter((products) => products.nome.toLowerCase() == search.toLowerCase()).map((product) => (
-                            <a href={`/product/${product.id}`}>
-                                <CardProduct product={product} />
-                            </a>
-                        ))}
-                    </>
-                )}
-            </div>
+            <Row>
+                {mock.map((product) => (
+                    <CardProduct product={product} />
+                ))}
+            </Row>
         </div>
     )
 }
