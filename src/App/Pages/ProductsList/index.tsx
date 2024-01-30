@@ -28,7 +28,7 @@ export function ProductsList() {
                 <>Resultados para "{search}"</>
             )}
             <Row>
-                {products.map((product) => (
+                {products?.map((product) => (
                     <CardProduct product={product} widthClassNames={2} />
                 ))}
             </Row>

@@ -33,16 +33,18 @@ export function Login() {
     return (
         <div className='login-container d-flex'>
             <div className='w-50 h-100 d-flex justify-content-center align-items-center'>
-                <Form className='d-flex flex-column gap-3 px-5 py-3 rounded rounded-4 background-filter' onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
+                <Form className='d-flex flex-column gap-3 px-5 py-3 rounded rounded-4 backdrop-blur' onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
                     <Row>
                         <Col>
+                        <a href="/">
                             <img src={Logo} alt="logomarketzoom" />
+                        </a>
                         </Col>
                     </Row>
 
                     <Row>
                         <Col className='d-flex flex-column'>
-                            <FormInput label='Nome de usuário:' type='text' name='username' placeholder='Seu nome de usuário' id='username' />
+                            <FormInput labelClassName='fw-bolder' label='Nome de usuário:' type='text' name='username' id='username' />
                             {formik.errors.username && (
                                 <div className='text-danger'>{formik.errors.username}</div>
                             )}
@@ -51,7 +53,7 @@ export function Login() {
 
                     <Row>
                         <Col className='d-flex flex-column'>
-                            <FormInput label='Senha:' type='password' name='password' placeholder='************' id='userpassword' />
+                            <FormInput labelClassName='fw-bolder' label='Senha:' type='password' name='password' id='userpassword' />
                             {formik.errors.password && (
                                 <div className='text-danger'>{formik.errors.password}</div>
                             )}
@@ -66,7 +68,7 @@ export function Login() {
 
                     <Row>
                         <Col className='text-center'>
-                            Não tem uma conta?<Link to={'/auth/register'}>Cadastre-se</Link>
+                            <span className="fw-600">Não tem uma conta? <Link className="purple-link" to={'/auth/register'}>Cadastre-se</Link></span>
                         </Col>
                     </Row>
                 </Form>

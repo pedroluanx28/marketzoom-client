@@ -132,6 +132,18 @@ button[disabled] {
 .hover-scale:hover {
   transform: scale(1.05);
 }
+
 .h-88{
   height: 88%;
+}
+
+.backdrop-blur {
+  backdrop-filter: blur(30px);
+  background-color: #ffffff5e;
+  border-radius: 10px;
+}
+
+.purple-link {
+  color: #656ED3;
+  text-decoration: none;
 }
