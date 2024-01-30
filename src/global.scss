@@ -30,6 +30,13 @@ $bg-color: #4249d1b3;
   background: linear-gradient(to right, #7db7ce, #fedbfb);
 }
 
+.background-auth {
+  background-image: url("@public/backgroundAuth.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .bg-market {
   background-color: $bg-color;
 }
@@ -56,10 +63,19 @@ $bg-color: #4249d1b3;
   height: 100vh !important;
 }
 
+.fw-600 {
+  font-weight: 600;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
   color: unset;
 }
+
 .bg-product {
   background-color: #ffffff61;
   padding: 0 4.2rem;
@@ -114,7 +130,7 @@ button[disabled] {
 }
 
 .hover-scale:hover {
-  transform: scale(1.09);
+  transform: scale(1.05);
 }
 .h-88{
   height: 88%;

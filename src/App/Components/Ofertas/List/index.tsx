@@ -4,262 +4,25 @@ import { IoIosArrowForward } from "react-icons/io";
 import "./style.scss"
 import { CardProduct } from "@/Components/Cards/CardProducts";
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { api } from "@/services";
 
-const mock = [
-  {
-    id: 1,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 2,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 3,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 4,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 5,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 6,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 7,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 1,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 2,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 3,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 4,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 5,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 6,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 7,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },{
-    id: 1,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 2,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 3,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 4,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 5,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 6,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 7,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },{
-    id: 1,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 2,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 3,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 4,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 5,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 6,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  },
-  {
-    id: 7,
-    avaliacao: [5, 5, 5, 5, 5],
-    avaliacoes: 5,
-    nome: "string",
-    descrição: "ldfkdkslfjdslfjlsdfjlsdflkdsj",
-    preco: 120,
-    detalhe: "fsdlfsdklflakj",
-  }
-]
 
 export function Products() {
+  const [product, setProducts] = useState([])
+
+  const fetchData = async () => {
+    try {
+      const response = await api.get('/products');
+      setProducts(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
 
   function LeftArrow() {
     const { scrollPrev } = useContext(VisibilityContext);
@@ -275,7 +38,7 @@ export function Products() {
     const { scrollNext } = useContext(VisibilityContext);
 
     return (
-      <button onClick={() => scrollNext()}  className="btn position-absolute top-0 end-0" >
+      <button onClick={() => scrollNext()} className="btn position-absolute top-0 end-0" >
         <IoIosArrowForward className="text-market" />
       </button>
     );
@@ -287,13 +50,13 @@ export function Products() {
         <div className="d-flex align-items-center gap-2">
           <div className="title-more-see" />
           <div className="d-flex align-items-center">
-            <h4 className="text-market">Produtos mais visto da Marketzoom</h4>
+            <h4 className="text-market m-0">Produtos mais visto da Marketzoom</h4>
           </div>
         </div>
       </div>
-      <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} scrollContainerClassName="list-products" wrapperClassName="w-100">
-        {mock.map((produto) => (
-          <CardProduct product={produto} key={produto.id} />
+      <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} scrollContainerClassName="list-products px-3 py-4 gap-3" wrapperClassName="w-100">
+        {product.map((produto, index) => (
+          <CardProduct product={produto} key={index} />
         ))}
       </ScrollMenu>
       <div className="d-flex justify-content-center">
@@ -302,5 +65,4 @@ export function Products() {
         </a>
       </div>
     </div>
-  )
-}
+)}

@@ -1,0 +1,22 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_223_205)">
+<rect width="1280" height="720" fill="#EBEFFF"/>
+<path d="M1553.43 734.5C1553.43 941.049 1389.1 1107 1188.22 1107C987.329 1107 823 941.049 823 734.5C823 527.951 987.329 362 1188.22 362C1389.1 362 1553.43 527.951 1553.43 734.5Z" stroke="#838CF1" stroke-width="100"/>
+<path d="M1785.43 -113.5C1785.43 93.0494 1621.1 259 1420.22 259C1219.33 259 1055 93.0494 1055 -113.5C1055 -320.049 1219.33 -486 1420.22 -486C1621.1 -486 1785.43 -320.049 1785.43 -113.5Z" stroke="#838CF1" stroke-width="100"/>
+<path d="M1569.43 751.5C1569.43 958.049 1405.1 1124 1204.22 1124C1003.33 1124 839 958.049 839 751.5C839 544.951 1003.33 379 1204.22 379C1405.1 379 1569.43 544.951 1569.43 751.5Z" stroke="#434BD2" stroke-width="100"/>
+<rect x="653" width="627" height="720" fill="#434BD2" fill-opacity="0.7"/>
+<rect x="-287" y="912.316" width="596.734" height="141.396" rx="70.698" transform="rotate(-41.1048 -287 912.316)" fill="#838CF1"/>
+<rect x="-252" y="895.052" width="553.742" height="131.209" rx="65.6045" transform="rotate(-41.1048 -252 895.052)" fill="#434BD2" fill-opacity="0.7"/>
+<rect x="434" y="584.141" width="124.941" height="124.94" rx="62.4701" transform="rotate(-41.1048 434 584.141)" fill="#434BD2" fill-opacity="0.7"/>
+<rect x="664" y="132.141" width="124.941" height="124.94" rx="62.4701" transform="rotate(-41.1048 664 132.141)" fill="#434BD2" fill-opacity="0.7"/>
+<rect y="91.1411" width="124.941" height="124.94" rx="62.4701" transform="rotate(-41.1048 0 91.1411)" fill="#434BD2" fill-opacity="0.7"/>
+<rect x="-229" y="645.316" width="596.734" height="141.396" rx="70.698" transform="rotate(-41.1048 -229 645.316)" fill="#838CF1"/>
+<rect x="-194" y="628.051" width="553.742" height="131.209" rx="65.6045" transform="rotate(-41.1048 -194 628.051)" fill="#434BD2" fill-opacity="0.7"/>
+<path d="M1800.43 -124.5C1800.43 82.0494 1636.1 248 1435.22 248C1234.33 248 1070 82.0494 1070 -124.5C1070 -331.049 1234.33 -497 1435.22 -497C1636.1 -497 1800.43 -331.049 1800.43 -124.5Z" stroke="#434BD2" stroke-width="100"/>
+</g>
+<defs>
+<clipPath id="clip0_223_205">
+<rect width="1280" height="720" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { Col, Modal, Row } from "react-bootstrap";
+import { api } from "@/services";
 
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Modal from "react-bootstrap/Modal";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -10,30 +13,20 @@ import Rating from '@mui/material/Rating';
 
 import { IoIosArrowDown } from "react-icons/io";
 
+import { ProductType } from "@/@types/Product";
+
 import image from "@public/produto.svg";
 
 import "./style.scss"
+import { Comments } from "@/@types/comments";
 
-type Product = {
-  avaliacao: number[],
-  avaliacoes: number,
-  nome: string,
-  descrição: string,
-  preco: number,
-  detalhe: string,
-}
-const mock: Product = {
-  avaliacao: [5, 5, 5, 5, 5],
-  avaliacoes: 5,
-  nome: "IPHONE PROO PLUS MAX",
-  descrição: "Compre e se arrependa, pois ele quebra",
-  preco: 120.00,
-  detalhe: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a viverra mi. Nunc pulvinar felis nec hendrerit iaculis. Ut eu odio ac quam varius bibendum. Cras vel vehicula enim, in tempor nunc. "
-}
+
 export default function Product() {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const [show, setShow] = useState(false);
+  const [product, setProduct] = useState({} as ProductType)
+  const [ratingProduct, setRatingProduct] = useState(0)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -47,7 +40,30 @@ export default function Product() {
     }
   }
 
-  const totalPrice = mock.preco * quantity;
+
+  const fetchData = async () => {
+    try {
+      const response = await api.get(`/products/${id}`);
+      setProduct(response.data)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      let Rating = 0
+      response.data.comments.map((rating: Comments) =>{
+        Rating += rating.rating
+      })
+      const productRating = Rating / response.data.comments.length
+      setRatingProduct(Number(productRating.toFixed(2)))
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+
+  const totalPrice = product.price * quantity;
   const installment = totalPrice / 12;
   return (
     <div className="overflow-auto p-5 h-88">
@@ -58,15 +74,15 @@ export default function Product() {
         <div className="w-50 height-85 bg-transparent d-flex flex-column gap-2 mx-3 p-3">
           <Row lg={12}>
             <Col lg={3}>
-              <Rating name="half-rating-read" defaultValue={Number(id)} precision={0.1} readOnly />
+              <Rating name="half-rating-read" value={ratingProduct} precision={0.1} readOnly />
             </Col>
             <Col>
-              ({mock.avaliacoes})
+              ({product?.comments?.length})
             </Col>
           </Row>
           <Row lg={12}>
-            <h3><strong>{mock.nome}</strong></h3>
-            <span>{mock.descrição}</span>
+            <h3><strong>{product?.name}</strong></h3>
+            <span>{product?.details}</span>
           </Row>
           <Row lg={12}>
             <h3 className="text-market">R${totalPrice.toFixed(2)}</h3>
@@ -83,7 +99,7 @@ export default function Product() {
               <button className="btn text-market" value="+" onClick={(e) => handleQuantity(e.currentTarget.value)}>+</button>
             </Col>
             <Col lg={9} className="pe-0">
-              <button className="btn btn-bg-white-text-purple w-100"  onClick={handleShow}>Comprar agora</button>
+              <button className="btn btn-bg-white-text-purple w-100" onClick={handleShow}>Comprar agora</button>
             </Col>
           </Row>
           <Row lg={12}>
@@ -100,7 +116,7 @@ export default function Product() {
               </AccordionSummary>
               <AccordionDetails className="d-flex flex-column">
                 <span>Detalhes</span>
-                {mock.detalhe}
+                {product?.details}
               </AccordionDetails>
             </Accordion>
             <Accordion className="bg-transparent">
@@ -109,44 +125,22 @@ export default function Product() {
                 aria-controls="panel1-content"
                 id="panel1-header"
               >
-                Comentários (11)
+                Comentários ({product?.comments?.length})
               </AccordionSummary>
               <AccordionDetails className="d-flex flex-column">
-                <div className="mb-3">
-                  <div className="d-inline-flex align-items-center gap-2">
-                    <span className="fw-bold d-inline-flex align-items-center">
-                      <img src="https://lastfm.freetls.fastly.net/i/u/ar0/66fbe23d1fecdca7e166f1e2af63a2d2" alt="Foto do usuário" className="user-pic" />
-                      Gustavo
-                    </span>
-                    <Rating name="half-rating-read" value={5} precision={1} size="small" readOnly />
+                {product?.comments?.map((comment) => (
+                  <div className="mb-3">
+                    <div className="d-inline-flex align-items-center gap-2">
+                      <span className="fw-bold d-inline-flex align-items-center">
+                        <img src="https://lastfm.freetls.fastly.net/i/u/ar0/66fbe23d1fecdca7e166f1e2af63a2d2" alt="Foto do usuário" className="user-pic" />
+                        {comment?.user?.name}
+                      </span>
+                      <Rating name="half-rating-read" value={comment?.rating} precision={1} size="small" readOnly />
+                    </div>
+                    <br />
+                    <span className="user-comment">{comment?.content}</span>
                   </div>
-                  <br />
-                  <span className="user-comment">Celular topzeira demais slk</span>
-                </div>
-
-                <div className="mb-3">
-                  <div className="d-inline-flex align-items-center gap-2">
-                    <span className="fw-bold d-inline-flex align-items-center">
-                      <img src="https://s2.glbimg.com/eDYqEGMxNwL2lHc9IgNst8IvTTI=/e.glbimg.com/og/ed/f/original/2017/08/25/safadao1.jpg" alt="Foto do usuário" className="user-pic" />
-                      Wesley
-                    </span>
-                    <Rating name="half-rating-read" value={5} precision={1} size="small" readOnly />
-                  </div>
-                  <br />
-                  <span className="user-comment">eu SEMPRE compro no Marketzoom!!!</span>
-                </div>
-
-                <div className="mb-3">
-                  <div className="d-inline-flex align-items-center gap-2">
-                    <span className="fw-bold d-inline-flex align-items-center">
-                      <img src="https://th.bing.com/th/id/OIP.JFQpAO3wGHNFIaUvaRmuxAHaE8?rs=1&pid=ImgDetMain" alt="Foto do usuário" className="user-pic" />
-                      Neimá
-                    </span>
-                    <Rating name="half-rating-read" value={5} precision={1} size="small" readOnly />
-                  </div>
-                  <br />
-                  <span className="user-comment">Vou traí mia izposa kkkkkk</span>
-                </div>
+                ))}
               </AccordionDetails>
             </Accordion>
           </Row>

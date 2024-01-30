@@ -1,10 +1,16 @@
-export type Product = {
-    id: number;
-    avaliacao: number[],
-    avaliacoes: number,
-    nome: string,
-    descrição: string,
-    preco: number,
-    detalhe: string,
-    desconto?: string | number
+import { Comments } from "./comments"
+import { User } from "./user"
+
+export type ProductType = {
+  id: number,
+  user_id: number,
+  shop_id: number,
+  name: string,
+  price: number,
+  stock_quantity: number,
+  details: string,
+  image: string,
+  user: User,
+  shop: null
+  comments: Comments[],
 }

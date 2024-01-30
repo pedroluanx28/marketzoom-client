@@ -8,6 +8,8 @@ import 'swiper/scss/autoplay';
 
 import './style.scss'
 
+import slide from '@public/slide.svg';
+
 export function Slide() {
     return (
         <Swiper
@@ -23,16 +25,9 @@ export function Slide() {
             pagination={{ clickable: true }}
             className='h-100 d-flex'
         >
-            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
-            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
-            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
-            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
-            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
-            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
-            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
-            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
-            <SwiperSlide><a href="/products"><img src="./Logo.svg"/></a></SwiperSlide>
-            <SwiperSlide><a href="/products">Slide 2</a></SwiperSlide>
+            <SwiperSlide><a href="/products"><img src={slide}/></a></SwiperSlide>
+            <SwiperSlide><a href="/products"><img src={slide}/></a></SwiperSlide>
+            <SwiperSlide><a href="/products"><img src={slide}/></a></SwiperSlide>
         </Swiper>
     );
 }

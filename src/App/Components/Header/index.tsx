@@ -14,7 +14,7 @@ export function Header() {
                 <img src={Logo} alt="Image Logo" className="image-logo" />
             </a>
             <div className="d-flex align-items-center gap-5">
-                {!userLogged && (
+                {userLogged && (
                     <>
                         <SearchInput />
                         <div className="d-flex align-items-center gap-2">
