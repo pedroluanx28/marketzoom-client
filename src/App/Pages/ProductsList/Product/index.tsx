@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
+
+
+import { ProductType } from "@/@types/Product";
+import { Comments } from "@/@types/comments";
 
 import { api } from "@/services";
 
@@ -13,12 +19,13 @@ import Rating from '@mui/material/Rating';
 
 import { IoIosArrowDown } from "react-icons/io";
 
-import { ProductType } from "@/@types/Product";
-
 import image from "@public/produto.svg";
 
+import 'swiper/css';
+import 'swiper/scss/navigation';
+import 'swiper/scss/pagination';
+import 'swiper/scss/autoplay';
 import "./style.scss"
-import { Comments } from "@/@types/comments";
 
 
 export default function Product() {
@@ -69,7 +76,19 @@ export default function Product() {
     <div className="overflow-auto p-5 h-88">
       <div className="bg-product align-self-center d-flex justify-content-center align-items-center gap-3 rounded rounded-4">
         <div className="w-50 height-85 bg-white d-flex justify-content-center aligm-items-center">
-          <img src={image} />
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+            loop
+            pagination={{ clickable: true }}
+            className='h-100 d-flex'
+        >
+            <SwiperSlide><img src={image} /></SwiperSlide>
+            <SwiperSlide><img src={image} /></SwiperSlide>
+            <SwiperSlide><img src={image} /></SwiperSlide>
+        </Swiper>
         </div>
         <div className="w-50 height-85 bg-transparent d-flex flex-column gap-2 mx-3 p-3">
           <Row lg={12}>
