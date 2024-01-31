@@ -55,7 +55,7 @@ export function Products() {
         </div>
       </div>
       <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} scrollContainerClassName="list-products px-3 py-4 gap-3" wrapperClassName="w-100">
-        {product.map((produto, index) => (
+        {product?.map((produto, index) => (
           <CardProduct product={produto} key={index} />
         ))}
       </ScrollMenu>

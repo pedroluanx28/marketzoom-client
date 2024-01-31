@@ -1,3 +1,4 @@
+import { Row } from "react-bootstrap"
 import { CardOffers } from "./Card"
 
 const mock = [
@@ -29,10 +30,10 @@ const mock = [
 
 export function ListOffers() {
     return (
-        <div style={{ height: "42%" }} className="d-flex justify-content-between">
+        <Row className="gap-5 px-2">
             {mock?.map((item, index) => (
                 <CardOffers title={item.title} span={item.span} link={item.link} button={item.button} key={index} />
             ))}
-        </div>
+        </Row>
     )
 }
