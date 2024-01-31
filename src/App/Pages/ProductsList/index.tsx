@@ -1,8 +1,11 @@
-import { CardProduct } from "@/Components/Cards/CardProducts";
-import { api } from "@/services";
 import { useEffect, useState } from "react";
-import Row from 'react-bootstrap/Row';
 import { useParams } from "react-router-dom";
+
+import Row from 'react-bootstrap/Row';
+
+import { api } from "@/services";
+
+import { CardProduct } from "@/Components/Cards/CardProducts";
 
 export function ProductsList() {
     const { search } = useParams();
@@ -25,11 +28,12 @@ export function ProductsList() {
     return (
         <div className="overflow-auto py-4 px-3 h-88">
             {search && (
-                <>Resultados para "{search}"</>
+                <span className="fs-2">Resultados para "<strong>{search}</strong>"</span>
             )}
-            <Row>
+
+            <Row className="px-4 mt-3">
                 {products?.map((product) => (
-                    <CardProduct product={product} widthClassNames={2} />
+                    <CardProduct product={product} widthClassNames={3} />
                 ))}
             </Row>
         </div>
