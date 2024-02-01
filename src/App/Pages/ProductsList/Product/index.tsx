@@ -9,7 +9,6 @@ import { ProductType } from "@/@types/Product";
 import { Comments } from "@/@types/comments";
 
 import { useAuth } from "@/hooks/useAuth";
-import { useAuth } from "@/hooks/useAuth";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";

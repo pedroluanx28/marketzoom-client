@@ -16,7 +16,6 @@ const initialValue = {
 
 const UserContext = createContext<UserProps>(initialValue)
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const UserContextProvider = ({ children }: Props) => {
     const [authenticated, setauthenticated] = useState(initialValue.authenticated)
 

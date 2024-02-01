@@ -1,22 +1,41 @@
 import { useFormik } from "formik";
 import Form from "react-bootstrap/Form";
 import { FormInput } from "@/Components/FormInput";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 import Logo from '@public/Logo.svg';
 
 import "./styles.scss";
 
 export function Register() {
+    const { api } = useAuth();
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
-            full_name: '',
+            name: '',
             user_name: '',
             email: '',
             password: '',
             confirm_password: '',
         },
-        onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: async (values) => {
+            if (values.password != values.confirm_password) {
+                alert("tudo errado");
+                return;
+            }
+
+            try {
+                await api.post("/users", {
+                    name: values.name,
+                    email: values.email,
+                    password: values.password,
+                });
+
+                navigate("/auth/login");
+            } catch (error) {
+                console.error(error);
+            }
         }
     })
     return (
@@ -29,7 +48,7 @@ export function Register() {
                         </a>                    </div>
                     <Form onSubmit={formik.handleSubmit} onChange={formik.handleChange}>
                         <div>
-                            <FormInput name="full_name" labelClassName="fw-bold" label="Nome Completo" type="text" />
+                            <FormInput name="name" labelClassName="fw-bold" label="Nome Completo" type="text" />
                         </div>
                         <div>
                             <FormInput name="user_name" labelClassName="fw-bold" label="Nome de usuário" type="text" />
