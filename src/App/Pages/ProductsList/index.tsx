@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 
 import Row from 'react-bootstrap/Row';
 
-import { api } from "@/services";
+import { useAuth } from "@/hooks/useAuth";
 
 import { CardProduct } from "@/Components/Cards/CardProducts";
 
 export function ProductsList() {
     const { search } = useParams();
+    const { api } = useAuth();
 
     const [products, setProducts] = useState([])
 

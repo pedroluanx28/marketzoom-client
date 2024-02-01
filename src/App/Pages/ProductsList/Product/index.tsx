@@ -7,7 +7,7 @@ import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/module
 import { ProductType } from "@/@types/Product";
 import { Comments } from "@/@types/comments";
 
-import { api } from "@/services";
+import { useAuth } from "@/hooks/useAuth";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -34,6 +34,7 @@ export default function Product() {
   const [show, setShow] = useState(false);
   const [product, setProduct] = useState({} as ProductType)
   const [ratingProduct, setRatingProduct] = useState(0)
+  const { api } = useAuth();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
