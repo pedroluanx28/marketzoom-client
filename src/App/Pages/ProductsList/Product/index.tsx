@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
+import Swal from "sweetalert2";
 
 
 import { ProductType } from "@/@types/Product";
@@ -33,7 +34,9 @@ export default function Product() {
   const { id } = useParams();
   const [show, setShow] = useState(false);
   const [product, setProduct] = useState({} as ProductType)
-  const [ratingProduct, setRatingProduct] = useState(0)
+  const [ratingProduct, setRatingProduct] = useState(0);
+  const userLogged = false;
+  const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -46,6 +49,37 @@ export default function Product() {
       setQuantity(quantity + 1)
     }
   }
+
+  const addToCart = () => {
+    if (!userLogged) {
+        Swal.fire({
+            customClass: {
+                cancelButton: 'text-dark',
+            },
+            icon: 'warning',
+            text: 'Para adicionar ao carrinho é necessário ter uma conta',
+            iconColor: '#9747FF',
+            confirmButtonText: "Criar conta",
+            cancelButtonColor: '#fff',
+            showCancelButton: true,
+            cancelButtonText: "Login",
+            focusCancel: false,
+            focusConfirm: false,
+        }).then((result) => {
+            if (result) {
+                if (result.isConfirmed) {
+                    navigate('/auth/register');
+                } else if (String(result.dismiss) === "cancel") {
+                    navigate('/auth/login');
+                } else {
+                    return;
+                }
+            }
+        })
+
+        return;
+    }
+}
 
 
   const fetchData = async () => {
@@ -122,7 +156,7 @@ export default function Product() {
             </Col>
           </Row>
           <Row lg={12}>
-            <button className="w-100 btn btn-bg-purple-text-white">Adicionar ao carrinho</button>
+            <button onClick={addToCart} className="w-100 btn btn-bg-purple-text-white">Adicionar ao carrinho</button>
           </Row>
           <Row lg={12} className="d-flex flex-colunm gap-3 overflow-auto">
             <Accordion className="bg-transparent">

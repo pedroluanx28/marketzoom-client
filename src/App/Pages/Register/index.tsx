@@ -29,19 +29,19 @@ export function Register() {
                         </a>                    </div>
                     <Form onSubmit={formik.handleSubmit} onChange={formik.handleChange}>
                         <div>
-                            <FormInput labelClassName="fw-bold" label="Nome Completo" type="text" />
+                            <FormInput name="full_name" labelClassName="fw-bold" label="Nome Completo" type="text" />
                         </div>
                         <div>
-                            <FormInput labelClassName="fw-bold" label="Nome de usuário" type="text" />
+                            <FormInput name="user_name" labelClassName="fw-bold" label="Nome de usuário" type="text" />
                         </div>
                         <div>
-                            <FormInput labelClassName="fw-bold" label="Email" type="text" />
+                            <FormInput name="email" labelClassName="fw-bold" label="Email" type="text" />
                         </div>
                         <div>
-                            <FormInput labelClassName="fw-bold" label="Senha" type="password" />
+                            <FormInput name="password" labelClassName="fw-bold" label="Senha" type="password" />
                         </div>
                         <div>
-                            <FormInput labelClassName="fw-bold" label="Confirme sua senha" type="password" />
+                            <FormInput name="confirm_password" labelClassName="fw-bold" label="Confirme sua senha" type="password" />
                         </div>
                         <button className="btn btn-bg-purple-text-white mt-3 mb-2 w-100">Criar</button>
                         <div className="text-center">
@@ -55,3 +55,4 @@ export function Register() {
         </div>
     )
 }
+
