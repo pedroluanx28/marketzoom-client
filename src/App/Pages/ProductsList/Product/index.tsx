@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { ProductType } from "@/@types/Product";
 import { Comments } from "@/@types/comments";
 
-import { api } from "@/services";
+import { useAuth } from "@/hooks/useAuth";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -34,9 +34,10 @@ export default function Product() {
   const { id } = useParams();
   const [show, setShow] = useState(false);
   const [product, setProduct] = useState({} as ProductType)
-  const [ratingProduct, setRatingProduct] = useState(0);
-  const userLogged = false;
-  const navigate = useNavigate();
+  const [ratingProduct, setRatingProduct] = useState(0)
+  const userLogged = false
+  const { api } = useAuth();
+  const navigate = useNavigate()
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

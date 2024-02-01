@@ -5,11 +5,12 @@ import "./style.scss"
 import { CardProduct } from "@/Components/Cards/CardProducts";
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { useContext, useEffect, useState } from "react";
-import { api } from "@/services";
+import { useAuth } from "@/hooks/useAuth";
 
 
 export function Products() {
   const [product, setProducts] = useState([])
+  const { api } = useAuth();
 
   const fetchData = async () => {
     try {
