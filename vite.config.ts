@@ -7,7 +7,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: '@', replacement: '/src/App' },
-      { find: '@public', replacement: '/public' },
+      { find: '@public', replacement: '/src/public' },
     ],
   },
   server: {

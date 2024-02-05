@@ -1,0 +1,29 @@
+programa {
+  funcao inicio() {
+    cadeia nomeDoAluno,pais,estadoCivil
+    inteiro idade, quantidade, cont, sala[]
+
+    escreva("Quantas peessoas tem sala?\n")
+    leia(quantidade)
+
+    para(cont = 1; cont < quantidade; cont++){
+
+    escreva("Escreva seu nome:\n")
+    leia(nomeDoAluno)
+
+    escreva("Escreva sua idade:\n")
+    leia(idade)
+
+    escreva("Escreva onde você nasceu(pais):\n")
+    leia(pais)
+
+    escreva("Escreva seu estado civil:\n")
+    leia(estadoCivil)
+
+    }
+
+    
+
+    // escreva("{" + "\n" + "Nome: " + nomeDoAluno + "\n" + "Idade: " + idade + "\n" +"pais: " + pais + "\n" + "Estado civil: " + estadoCivil + "\n" + "}" )
+  }
+}
