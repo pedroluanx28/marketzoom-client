@@ -27,7 +27,9 @@ export function Login() {
         validationSchema: validation,
         onSubmit: async (values) => {
             try {
-                await api.post("/auth/login", values);
+                const { data } = await api.post("/auth/login", values);
+
+                localStorage.setItem("token", data.token)
             } catch (error) {
                 console.error(error);
             }
