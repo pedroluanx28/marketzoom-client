@@ -21,7 +21,7 @@ export function CardOffers({
     return (
         <Col className="card-ofertas d-flex flex-column justify-content-between align-items-center bg-offers rounded gap-3 p-3">
             <h4>{title}</h4>
-            <img src="./bag.svg" alt={image} className="imagem-ofertas" />
+            <img src="./src/public/bag.svg" alt={image} className="imagem-ofertas" />
             <span className="text-center">{span}</span>
             <button
                 className="btn btn-bg-purple-text-white">
