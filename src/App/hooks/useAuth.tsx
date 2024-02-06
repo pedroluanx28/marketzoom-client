@@ -4,6 +4,9 @@ export function useAuth() {
     const api = axios.create({
         baseURL: import.meta.env.VITE_BASE_URL,
         withCredentials: true,
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
     });
 
     return {
