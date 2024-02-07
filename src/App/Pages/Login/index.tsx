@@ -25,7 +25,7 @@ const validation = Yup.object().shape({
 export function Login() {
     const { api } = useAuth();
     const navigate = useNavigate();
-    const { setauthenticated } = useContext(UserContext)
+    const { setAuthenticated } = useContext(UserContext)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -37,7 +37,7 @@ export function Login() {
                 const { data } = await api.post("/auth/login", values);
 
                 localStorage.setItem("token", data.token);
-                setauthenticated(true);
+                setAuthenticated(true);
                 navigate('/');
             } catch (error) {
                 console.error(error);

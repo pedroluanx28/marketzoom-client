@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules';
@@ -27,20 +27,21 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/autoplay';
 import "./style.scss"
+import { UserContext } from "@/Context/UserContext";
 
 
 export default function Product() {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
-  const [show, setShow] = useState(false);
+  const [payNow, setPayNow] = useState(false);
   const [product, setProduct] = useState({} as ProductType)
   const [ratingProduct, setRatingProduct] = useState(0)
-  const userLogged = false
+  const { authenticated } = useContext(UserContext);
   const { api } = useAuth();
   const navigate = useNavigate()
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setPayNow(false);
+  const handleShow = () => setPayNow(true);
 
   const handleQuantity = (e: string) => {
     if (e == "-") {
@@ -52,35 +53,72 @@ export default function Product() {
   }
 
   const addToCart = () => {
-    if (!userLogged) {
-        Swal.fire({
-            customClass: {
-                cancelButton: 'text-dark',
-            },
-            icon: 'warning',
-            text: 'Para adicionar ao carrinho é necessário ter uma conta',
-            iconColor: '#9747FF',
-            confirmButtonText: "Criar conta",
-            cancelButtonColor: '#fff',
-            showCancelButton: true,
-            cancelButtonText: "Login",
-            focusCancel: false,
-            focusConfirm: false,
-        }).then((result) => {
-            if (result) {
-                if (result.isConfirmed) {
-                    navigate('/auth/register');
-                } else if (String(result.dismiss) === "cancel") {
-                    navigate('/auth/login');
-                } else {
-                    return;
-                }
-            }
-        })
+    if (!authenticated) {
+      Swal.fire({
+        customClass: {
+          cancelButton: 'text-dark',
+        },
+        icon: 'warning',
+        text: 'Para adicionar ao carrinho é necessário ter uma conta',
+        iconColor: '#9747FF',
+        confirmButtonText: "Criar conta",
+        cancelButtonColor: '#fff',
+        showCancelButton: true,
+        cancelButtonText: "Login",
+        focusCancel: false,
+        focusConfirm: false,
+      }).then((result) => {
+        if (result) {
+          if (result.isConfirmed) {
+            navigate('/auth/register');
+          } else if (String(result.dismiss) === "cancel") {
+            navigate('/auth/login');
+          } else {
+            return;
+          }
+        }
+      })
 
-        return;
+      return;
     }
-}
+    else {
+      Swal.fire({
+        customClass: {
+          cancelButton: 'text-dark',
+        },
+        icon: 'question',
+        text: 'Deseja adicionar este item ao seu carrinho?',
+        iconColor: '#9747FF',
+        confirmButtonText: "Adicionar ao carrinho",
+        cancelButtonColor: '#fff',
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        focusCancel: false,
+        focusConfirm: false,
+      }).then((result) => {
+        if (result) {
+          if (result.isConfirmed) {
+            const addProductInCart = async () => {
+              try {
+                const { data } = await api.post(`/cart/add-item/${id}`, {
+                  'product_quantity': quantity
+                })
+                console.log(data)
+              } catch (error) {
+                console.error(error);
+              }
+            }
+
+            addProductInCart()
+          } else if (String(result.dismiss) === "cancel") {
+              alert("ola")
+          } else {
+            return;
+          }
+        }
+      })
+    }
+  }
 
 
   const fetchData = async () => {
@@ -89,7 +127,7 @@ export default function Product() {
       setProduct(response.data)
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       let Rating = 0
-      response.data.comments.map((rating: Comments) =>{
+      response.data.comments.map((rating: Comments) => {
         Rating += rating.rating
       })
       const productRating = Rating / response.data.comments.length
@@ -119,11 +157,11 @@ export default function Product() {
             loop
             pagination={{ clickable: true }}
             className='h-100 d-flex'
-        >
+          >
             <SwiperSlide><img src={image} /></SwiperSlide>
             <SwiperSlide><img src={image} /></SwiperSlide>
             <SwiperSlide><img src={image} /></SwiperSlide>
-        </Swiper>
+          </Swiper>
         </div>
         <div className="w-50 height-85 bg-transparent d-flex flex-column gap-2 mx-3 p-3">
           <Row lg={12}>
@@ -200,7 +238,7 @@ export default function Product() {
           </Row>
         </div>
       </div>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={payNow} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Caloteiro</Modal.Title>
         </Modal.Header>

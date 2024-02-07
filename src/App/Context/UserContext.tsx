@@ -6,27 +6,27 @@ type Props = {
 
 type UserProps = {
     authenticated: boolean;
-    setauthenticated: (NewState: boolean) => void
+    setAuthenticated: (NewState: boolean) => void
 }
 
 const initialValue = {
     authenticated: false,
-    setauthenticated: () => { }
+    setAuthenticated: () => { }
 }
 
 const UserContext = createContext<UserProps>(initialValue)
 
 const UserContextProvider = ({ children }: Props) => {
-    const [authenticated, setauthenticated] = useState(initialValue.authenticated)
+    const [authenticated, setAuthenticated] = useState(initialValue.authenticated)
 
     useEffect(() =>{
         if (localStorage.getItem('token')) {
-            setauthenticated(true)
+            setAuthenticated(true)
         }
     },[])
 
     return (
-        <UserContext.Provider value={{ authenticated, setauthenticated }}>
+        <UserContext.Provider value={{ authenticated, setAuthenticated }}>
             {children}
         </UserContext.Provider>
     )

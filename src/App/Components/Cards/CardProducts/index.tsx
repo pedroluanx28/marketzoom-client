@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ProductType } from '@/@types/Product';
 import Col from 'react-bootstrap/Col';
 
@@ -8,22 +8,23 @@ import { Rating } from '@mui/material';
 import Swal from 'sweetalert2';
 
 import './styles.scss';
+import { UserContext } from '@/Context/UserContext';
 
 type cardProductProps = {
     product: ProductType;
-    widthClassNames?: number
+    widthClassNames?: number;
 }
 
 export function CardProduct({ product, widthClassNames }: cardProductProps) {
     const navigate = useNavigate();
-    const userLogged = false;
+    const { authenticated } = useContext(UserContext);
     const [addCart, setAddCart] = useState(false);
 
     const hoverEnter = () => setAddCart(true);
     const hoverOver = () => setAddCart(false);
 
     const addToCart = () => {
-        if (!userLogged) {
+        if (!authenticated) {
             Swal.fire({
                 customClass: {
                     cancelButton: 'text-dark',

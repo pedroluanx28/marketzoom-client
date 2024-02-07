@@ -14,7 +14,7 @@ export function Register() {
     const formik = useFormik({
         initialValues: {
             name: '',
-            user_name: '',
+            username: '',
             email: '',
             password: '',
             confirm_password: '',
@@ -28,6 +28,7 @@ export function Register() {
             try {
                 await api.post("/users", {
                     name: values.name,
+                    username: values.username,
                     email: values.email,
                     password: values.password,
                 });
@@ -51,7 +52,7 @@ export function Register() {
                             <FormInput name="name" labelClassName="fw-bold" label="Nome Completo" type="text" />
                         </div>
                         <div>
-                            <FormInput name="user_name" labelClassName="fw-bold" label="Nome de usuário" type="text" />
+                            <FormInput name="username" labelClassName="fw-bold" label="Nome de usuário" type="text" />
                         </div>
                         <div>
                             <FormInput name="email" labelClassName="fw-bold" label="Email" type="text" />
