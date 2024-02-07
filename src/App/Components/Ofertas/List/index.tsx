@@ -1,12 +1,14 @@
+import { useContext, useEffect, useState } from "react";
+
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-
-import "./style.scss"
-import { CardProduct } from "@/Components/Cards/CardProducts";
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
-import { useContext, useEffect, useState } from "react";
+
 import { useAuth } from "@/hooks/useAuth";
 
+import { CardProduct } from "@/Components/Cards/CardProducts";
+
+import "./style.scss"
 
 export function Products() {
   const [product, setProducts] = useState([])
@@ -23,6 +25,7 @@ export function Products() {
 
   useEffect(() => {
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function LeftArrow() {

@@ -1,18 +1,24 @@
-import { SearchInput } from '@/Components/SearchInput';
+import { useContext } from 'react';
+
+import Swal from 'sweetalert2';
 import { BsCart3 } from "react-icons/bs";
-import Logo from "@public/Logo.png";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+
+import { UserContext } from '@/Context/UserContext';
+
+import { SearchInput } from '@/Components/SearchInput';
+
+import Logo from "@public/Logo.png";
 
 import './styles.scss';
 
 export function Header() {
-    const userLogged = false;
+    const { authenticated } = useContext(UserContext)
     const navigate = useNavigate();
 
     function isAuthenticated() {
-        if (userLogged) {
+        if (authenticated) {
             navigate('/user/cart');
         } else {
             Swal.fire({
@@ -61,7 +67,7 @@ export function Header() {
                         <span className="cart-span cart-price">R$ 57,99</span>
                     </div>
                 </div>
-                {userLogged ? (
+                {authenticated ? (
                     <a href="/user/profile">
                         <FaUserCircle className="fs-2" />
                     </a>

@@ -1,14 +1,19 @@
-import { useEffect } from 'react';
-import { useFormik } from 'formik'
-import { FormInput } from '@/Components/FormInput';
-import { Link } from 'react-router-dom'
+import { useContext } from 'react';
+
+import { Link, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik';
 import * as Yup from "yup"
+
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Logo from '@public/Logo.svg';
-import axios from 'axios';
+
+import { UserContext } from '@/Context/UserContext';
 import { useAuth } from '@/hooks/useAuth';
+
+import { FormInput } from '@/Components/FormInput';
+
+import Logo from '@public/Logo.svg';
 
 import './style.scss'
 
@@ -19,6 +24,8 @@ const validation = Yup.object().shape({
 
 export function Login() {
     const { api } = useAuth();
+    const navigate = useNavigate();
+    const { setauthenticated } = useContext(UserContext)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -29,24 +36,15 @@ export function Login() {
             try {
                 const { data } = await api.post("/auth/login", values);
 
-                localStorage.setItem("token", data.token)
+                localStorage.setItem("token", data.token);
+                setauthenticated(true);
+                navigate('/');
             } catch (error) {
                 console.error(error);
             }
         }
     })
 
-    useEffect(() => {
-        async function getToken() {
-            try {
-                const data = await axios.get('http://127.0.0.1:8001/sanctum/csrf-cookie');
-                console.log(data);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        getToken();
-    }, [])
     return (
         <div className='login-container d-flex'>
             <div className='w-50 h-100 d-flex justify-content-center align-items-center'>

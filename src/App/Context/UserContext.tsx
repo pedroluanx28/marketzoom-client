@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 
 type Props = {
     children: ReactNode;
@@ -10,7 +10,7 @@ type UserProps = {
 }
 
 const initialValue = {
-    authenticated: true,
+    authenticated: false,
     setauthenticated: () => { }
 }
 
@@ -19,7 +19,11 @@ const UserContext = createContext<UserProps>(initialValue)
 const UserContextProvider = ({ children }: Props) => {
     const [authenticated, setauthenticated] = useState(initialValue.authenticated)
 
-    
+    useEffect(() =>{
+        if (localStorage.getItem('token')) {
+            setauthenticated(true)
+        }
+    },[])
 
     return (
         <UserContext.Provider value={{ authenticated, setauthenticated }}>
