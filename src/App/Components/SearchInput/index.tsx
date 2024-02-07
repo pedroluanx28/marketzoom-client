@@ -15,9 +15,14 @@ export function SearchInput() {
                 type="search"
                 placeholder="Busque aqui seu produto"
                 onChange={(e) => setSearch(e.target.value)}
-                onKeyUp={(e) => (e.key === "Enter" && navigate(`/products/${search}`))}
+                onKeyUp={(e) => {
+                    if (search !== "") {
+                        (e.key === "Enter" && navigate(`/products/${search}`))
+                    }
+                }
+                }
             />
-            <a href={`/products/${search}`}>
+            <a href={search ?? `/products/${search}`}>
                 <button className="btn btn-bg-purple-text-white search-button"><IoSearch /></button>
             </a>
         </div>
