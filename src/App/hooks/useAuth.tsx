@@ -1,9 +1,12 @@
+import { User } from "@/@types/user";
 import { UserContext } from "@/Context/UserContext";
 import axios from "axios";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function useAuth() {
-    const { setAuthenticated } = useContext(UserContext);
+    const { setAuthenticated, setCurrentAuth } = useContext(UserContext);
+    const navigate = useNavigate();
     const api = axios.create({
         baseURL: import.meta.env.VITE_BASE_URL,
         withCredentials: true,
@@ -12,11 +15,15 @@ export function useAuth() {
         }
     });
 
-    const logout = async () => {
+    const logout = async (e: any) => {
         try {
+            e.preventDefault();
             await api.post('auth/logout');
             setAuthenticated(false);
+            setCurrentAuth({} as User);
             localStorage.removeItem('token');
+
+            navigate('/auth/login');
         } catch (error) {
             console.error(error);
         }

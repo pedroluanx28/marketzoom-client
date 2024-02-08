@@ -33,8 +33,8 @@ type Product = {
 
 export function Header() {
     const [cart, setCart] = useState([] as Product[]);
-    const { authenticated } = useContext(UserContext)
-    const { api, logout } = useAuth();
+    const { authenticated, currentAuth } = useContext(UserContext)
+    const { api } = useAuth();
     const navigate = useNavigate();
 
     const fetchCart = async () => {
@@ -91,7 +91,6 @@ export function Header() {
         <div className="header d-flex justify-content-between align-items-center header-border px-4">
             <a href="/">
                 <img src={Logo} alt="Image Logo" className="image-logo" />
-                <button onClick={logout}>desonline</button>
             </a>
             <div className="d-flex align-items-center gap-5">
                 <SearchInput />
@@ -99,7 +98,7 @@ export function Header() {
                     <div onClick={isAuthenticated} role="button">
                         <div className="position-relative">
                             <BsCart3 className="fs-3" />
-                            {cart.length > 0 && <label className="label-cart">{cart.length}</label>}
+                            {(cart?.length > 0) && <label className="label-cart">{cart.length}</label>}
                         </div>
                     </div>
                     <div className="d-flex flex-column">
@@ -107,10 +106,10 @@ export function Header() {
                         <span className="cart-span cart-price">{totalPriceCart}</span>
                     </div>
                 </div>
-                {authenticated ? (
+                {localStorage.getItem('token') ? (
                     <a href="/user/profile">
                         <FaUserCircle className="fs-2" />
-                        <span className="ms-2">Username</span>
+                        <span className="ms-2">{currentAuth.username}</span>
                     </a>
                 ) : (
                     <a href="/auth/login">
