@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Swal from 'sweetalert2';
 import { BsCart3 } from "react-icons/bs";
@@ -10,12 +10,42 @@ import { UserContext } from '@/Context/UserContext';
 import { SearchInput } from '@/Components/SearchInput';
 
 import Logo from "@public/Logo.png";
+import { useAuth } from '@/hooks/useAuth';
 
 import './styles.scss';
 
+type Product = {
+    product: {
+        id: number;
+        average_rating: number;
+        details: string;
+        image: string;
+        name: string;
+        price: number;
+        shop_id: null;
+        stock_quantity: number;
+        total_ratings: null;
+        user_id: number;
+    }
+    product_id: number;
+    product_quantity: number;
+}
+
 export function Header() {
+    const [cart, setCart] = useState([] as Product[]);
     const { authenticated } = useContext(UserContext)
+    const { api, logout } = useAuth();
     const navigate = useNavigate();
+
+    const fetchCart = async () => {
+        try {
+            const { data } = await api.get('/cart');
+
+            setCart(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     function isAuthenticated() {
         if (authenticated) {
@@ -48,10 +78,20 @@ export function Header() {
         }
     }
 
+    const totalPriceCart =
+        cart.reduce((accumulator, produto) =>
+            accumulator + produto.product_quantity * produto.product.price, 0)
+            .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+
+    useEffect(() => {
+        fetchCart();
+    }, []);
+
     return (
         <div className="header d-flex justify-content-between align-items-center header-border px-4">
             <a href="/">
                 <img src={Logo} alt="Image Logo" className="image-logo" />
+                <button onClick={logout}>desonline</button>
             </a>
             <div className="d-flex align-items-center gap-5">
                 <SearchInput />
@@ -59,17 +99,18 @@ export function Header() {
                     <div onClick={isAuthenticated} role="button">
                         <div className="position-relative">
                             <BsCart3 className="fs-3" />
-                            <label className="label-cart">3</label>
+                            {cart.length > 0 && <label className="label-cart">{cart.length}</label>}
                         </div>
                     </div>
                     <div className="d-flex flex-column">
                         <span className="cart-span">Carrinho: </span>
-                        <span className="cart-span cart-price">R$ 57,99</span>
+                        <span className="cart-span cart-price">{totalPriceCart}</span>
                     </div>
                 </div>
                 {authenticated ? (
                     <a href="/user/profile">
                         <FaUserCircle className="fs-2" />
+                        <span className="ms-2">Username</span>
                     </a>
                 ) : (
                     <a href="/auth/login">

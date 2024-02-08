@@ -1,3 +1,4 @@
+import { User } from "@/@types/user";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
 type Props = {
@@ -6,18 +7,23 @@ type Props = {
 
 type UserProps = {
     authenticated: boolean;
-    setAuthenticated: (NewState: boolean) => void
+    setAuthenticated: (NewState: boolean) => void;
+    currentAuth: User;
+    setCurrentAuth: (NewState: User) => void;
 }
 
 const initialValue = {
     authenticated: false,
-    setAuthenticated: () => { }
+    setAuthenticated: () => {},
+    currentAuth: {} as User,
+    setCurrentAuth: () => {},
 }
 
 const UserContext = createContext<UserProps>(initialValue)
 
 const UserContextProvider = ({ children }: Props) => {
-    const [authenticated, setAuthenticated] = useState(initialValue.authenticated)
+    const [authenticated, setAuthenticated] = useState(initialValue.authenticated);
+    const [currentAuth, setCurrentAuth] = useState(initialValue.currentAuth);
 
     useEffect(() =>{
         if (localStorage.getItem('token')) {
@@ -26,7 +32,7 @@ const UserContextProvider = ({ children }: Props) => {
     },[])
 
     return (
-        <UserContext.Provider value={{ authenticated, setAuthenticated }}>
+        <UserContext.Provider value={{ authenticated, setAuthenticated, currentAuth, setCurrentAuth }}>
             {children}
         </UserContext.Provider>
     )

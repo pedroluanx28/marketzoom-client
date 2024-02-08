@@ -16,7 +16,6 @@ type product = {
     }
     product_id: number;     
     product_quantity: number;
-
 }
 
 export function Cart() {
