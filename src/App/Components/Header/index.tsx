@@ -37,16 +37,6 @@ export function Header() {
     const { api, logout } = useAuth();
     const navigate = useNavigate();
 
-    const fetchCart = async () => {
-        try {
-            const { data } = await api.get('/cart');
-
-            setCart(data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     function isAuthenticated() {
         if (authenticated) {
             navigate('/user/cart');
@@ -84,6 +74,15 @@ export function Header() {
             .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
     useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                const { data } = await api.get('/cart');
+    
+                setCart(data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
         fetchCart();
     }, []);
 
@@ -91,7 +90,10 @@ export function Header() {
         <div className="header d-flex justify-content-between align-items-center header-border px-4">
             <a href="/">
                 <img src={Logo} alt="Image Logo" className="image-logo" />
-                <button onClick={logout}>desonline</button>
+                <button onClick={e => {
+                    e.preventDefault()
+                    logout()
+                }} type='button'>desonline</button>
             </a>
             <div className="d-flex align-items-center gap-5">
                 <SearchInput />

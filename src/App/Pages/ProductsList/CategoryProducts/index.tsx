@@ -4,7 +4,7 @@ import { CardProduct } from "@/Components/Cards/CardProducts";
 import { useAuth } from "@/hooks/useAuth"
 import { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export function CategoryProducts() {
    const { api } = useAuth();
@@ -29,6 +29,7 @@ export function CategoryProducts() {
 
    return (
       <Row className="px-4 mt-3">
+         <Link to="/"><a href="#" className="btn btn-bg-purple-text-white">{'<-'} Voltar</a></Link>
          <h1 className="text-center pb-2">{category.name}</h1>
          <p className="text-center pb-4">{category.slogan}</p>
          {products.map(product => (
