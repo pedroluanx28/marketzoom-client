@@ -10,7 +10,7 @@ export function ListOffers() {
 
     async function fetchCatgories() {
         try {
-            const { data } = await api.get('/categories');
+            const { data } = await api.get('/categories/available');
             console.log('categories', data);
             setCategories(data);
         } catch (error) {
