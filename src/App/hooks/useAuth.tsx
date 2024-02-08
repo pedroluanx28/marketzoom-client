@@ -15,6 +15,7 @@ export function useAuth() {
         }
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const logout = async (e: any) => {
         try {
             e.preventDefault();

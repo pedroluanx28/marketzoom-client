@@ -85,6 +85,7 @@ export function Header() {
 
     useEffect(() => {
         fetchCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -109,7 +110,7 @@ export function Header() {
                 {localStorage.getItem('token') ? (
                     <a href="/user/profile">
                         <FaUserCircle className="fs-2" />
-                        <span className="ms-2">{currentAuth.username}</span>
+                        <span className="ms-2">{currentAuth.username?.split(' ')[0]}</span>
                     </a>
                 ) : (
                     <a href="/auth/login">
