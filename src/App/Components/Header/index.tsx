@@ -37,6 +37,16 @@ export function Header() {
     const { api, logout } = useAuth();
     const navigate = useNavigate();
 
+    const fetchCart = async () => {
+        try {
+            const { data } = await api.get('/cart');
+
+            setCart(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
     function isAuthenticated() {
         if (authenticated) {
             navigate('/user/cart');
@@ -74,15 +84,6 @@ export function Header() {
             .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
     useEffect(() => {
-        const fetchCart = async () => {
-            try {
-                const { data } = await api.get('/cart');
-    
-                setCart(data);
-            } catch (error) {
-                console.error(error);
-            }
-        }
         fetchCart();
     }, []);
 
