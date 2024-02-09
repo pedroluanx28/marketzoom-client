@@ -6,7 +6,7 @@ import { Header } from "@/Components/Header";
 import { Profile } from "@/Pages/Profile";
 
 export function PrivateRoutes() {
-    const authenticated = localStorage.getItem('token');
+    const authenticated = sessionStorage.getItem('token');
     return (
         <>
             <Header />
