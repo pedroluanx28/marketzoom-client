@@ -54,11 +54,6 @@ export function CardProduct({ product, widthClassNames }: cardProductProps) {
         }
     }
 
-    useEffect(() => {
-        console.log(product);
-        
-    }, [product]);
-
     return (
         <Col
             lg={widthClassNames}
