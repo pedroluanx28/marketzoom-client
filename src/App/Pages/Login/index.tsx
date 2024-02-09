@@ -36,7 +36,7 @@ export function Login() {
             try {
                 const { data } = await api.post("/auth/login", values);
 
-                localStorage.setItem("token", data.token);
+                sessionStorage.setItem("token", data.token);
                 setAuthenticated(true);
                 navigate('/');
             } catch (error) {
