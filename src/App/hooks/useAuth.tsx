@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function useAuth() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { setAuthenticated, setCurrentAuth } = useContext(UserContext);
     const navigate = useNavigate();
     const api = axios.create({

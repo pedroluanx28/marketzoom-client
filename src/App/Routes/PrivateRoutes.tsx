@@ -10,14 +10,14 @@ export function PrivateRoutes() {
     return (
         <>
             <Header />
-            <Routes>
-                {authenticated ? (
-                    <>
-                        <Route path="cart" element={<Cart />} />
-                        <Route path="profile" element={<Profile />} />
-                    </>
-                ) : <Route path="*" element={<Navigate to="/"/>}/>}
-            </Routes>
+                <Routes>
+                    {authenticated ? (
+                        <>
+                            <Route path="cart" element={<Cart />} />
+                            <Route path="profile" element={<Profile />} />
+                        </>
+                    ) : <Route path="*" element={<Navigate to="/" />} />}
+                </Routes>
         </>
     )
 }

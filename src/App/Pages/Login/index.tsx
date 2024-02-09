@@ -25,7 +25,7 @@ const validation = Yup.object().shape({
 export function Login() {
     const { api } = useAuth();
     const navigate = useNavigate();
-    const { setAuthenticated, setCurrentAuth } = useContext(UserContext)
+    const { setAuthenticated } = useContext(UserContext)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -38,7 +38,6 @@ export function Login() {
 
                 sessionStorage.setItem("token", data.token);
                 setAuthenticated(true);
-                setCurrentAuth(data.user);
                 navigate('/');
             } catch (error) {
                 console.error(error);

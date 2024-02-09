@@ -14,9 +14,9 @@ type UserProps = {
 
 const initialValue = {
     authenticated: false,
-    setAuthenticated: () => {},
+    setAuthenticated: () => { },
     currentAuth: {} as User,
-    setCurrentAuth: () => {},
+    setCurrentAuth: () => { },
 }
 
 const UserContext = createContext<UserProps>(initialValue)
@@ -29,7 +29,7 @@ const UserContextProvider = ({ children }: Props) => {
         if (sessionStorage.getItem('token')) {
             setAuthenticated(true)
         }
-    },[])
+    }, [])
 
     return (
         <UserContext.Provider value={{ authenticated, setAuthenticated, currentAuth, setCurrentAuth }}>

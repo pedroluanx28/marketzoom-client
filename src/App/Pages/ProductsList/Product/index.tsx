@@ -175,6 +175,7 @@ export default function Product() {
           <Row lg={12}>
             <h3><strong>{product?.name}</strong></h3>
             <span>{product?.details}</span>
+            <span>Estoque disponível: {product?.stock_quantity}</span>
           </Row>
           <Row lg={12}>
             <h3 className="text-market">R${totalPrice.toFixed(2)}</h3>

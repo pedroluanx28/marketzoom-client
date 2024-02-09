@@ -24,6 +24,18 @@ $bg-color: #4249d1b3;
   border: 3px solid transparent;
 }
 
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  outline: none;
+
+}
+
 .div-container {
   height: 100vh;
   width: 100vw;
@@ -107,6 +119,10 @@ a {
   height: 35%;
 }
 
+.w-10 {
+  width: 10%;
+}
+
 .blur {
   backdrop-filter: blur(15px);
 }
@@ -133,7 +149,7 @@ button[disabled] {
   transform: scale(1.05);
 }
 
-.h-88{
+.h-88 {
   height: 88%;
 }
 
