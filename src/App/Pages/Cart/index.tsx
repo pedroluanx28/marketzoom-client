@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth"
-import { useEffect, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { Col, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 
@@ -125,6 +125,25 @@ export function Cart() {
         }
     }
 
+    function updateTotalCartValue(event: FormEvent<HTMLInputElement>) {
+        setTotalValueCart([
+            ...totalValueCart,
+            Number(event.currentTarget.value)
+        ])
+    }
+
+    function deleteTotalCartValue(event: FormEvent<HTMLInputElement>) {
+        setTotalValueCart(
+            totalValueCart.filter(value =>
+                value != Number(event.currentTarget.value)
+            )
+        )
+    }
+
+    const sumCartPrice = totalValueCart.reduce((accumulator, value) =>
+        Number(accumulator) + Number(value), 0)
+        .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+
     useEffect(() => {
         fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -136,7 +155,7 @@ export function Cart() {
                     productsCart.map((productCart) => (
                         <Row key={productCart.product.id} className="d-flex">
                             <Col lg={1}>
-                                <input type="checkbox" className="form-check-input" value={productCart.product_quantity * productCart.product.price} onClick={(e) => setTotalValueCart([...totalValueCart, Number(e.currentTarget.value)])} />
+                                <input type="checkbox" className="form-check-input" value={productCart.product_quantity * productCart.product.price} onClick={(e) => e.currentTarget.checked ? updateTotalCartValue(e) : deleteTotalCartValue(e)} />
                             </Col>
                             <Col lg={2}>
                                 <img src={productCart.product.image} alt="sla" />
@@ -161,9 +180,10 @@ export function Cart() {
                 )}
             </Col>
             <Col>
-                {totalValueCart.map((value) => (
+                {/* {totalValueCart.map((value) => (
                     <>{value}</>
-                ))}
+                ))} */}
+                {sumCartPrice}
             </Col>
         </div>
     )
