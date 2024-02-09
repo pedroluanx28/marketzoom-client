@@ -49,7 +49,7 @@ export function Header() {
             console.error(error);
         }
     }
-
+    
     function isAuthenticated() {
         if (authenticated) {
             navigate('/user/cart');
