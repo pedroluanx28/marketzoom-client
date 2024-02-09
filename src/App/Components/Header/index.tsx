@@ -121,7 +121,7 @@ export function Header() {
                         <span className="cart-span cart-price">{totalPriceCart}</span>
                     </div>
                 </div>
-                {localStorage.getItem('token') ? (
+                {sessionStorage.getItem('token') ? (
                     <a href="/user/profile">
                         <FaUserCircle className="fs-2" />
                         <span className="ms-2">{user?.username?.split(' ')[0]}</span>

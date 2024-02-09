@@ -12,7 +12,7 @@ export function useAuth() {
         baseURL: import.meta.env.VITE_BASE_URL,
         withCredentials: true,
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`
         }
     });
 
@@ -23,7 +23,7 @@ export function useAuth() {
             await api.post('auth/logout');
             setAuthenticated(false);
             setCurrentAuth({} as User);
-            localStorage.removeItem('token');
+            sessionStorage.removeItem('token');
 
             navigate('/auth/login');
         } catch (error) {

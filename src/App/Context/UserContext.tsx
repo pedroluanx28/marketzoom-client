@@ -25,9 +25,8 @@ const UserContextProvider = ({ children }: Props) => {
     const [authenticated, setAuthenticated] = useState(initialValue.authenticated);
     const [currentAuth, setCurrentAuth] = useState(initialValue.currentAuth);
 
-
-    useEffect(() => {
-        if (localStorage.getItem('token')) {
+    useEffect(() =>{
+        if (sessionStorage.getItem('token')) {
             setAuthenticated(true)
         }
     }, [])
