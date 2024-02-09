@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ProductType } from '@/@types/Product';
 import Col from 'react-bootstrap/Col';
 
@@ -54,6 +54,11 @@ export function CardProduct({ product, widthClassNames }: cardProductProps) {
         }
     }
 
+    useEffect(() => {
+        console.log(product);
+        
+    }, [product]);
+
     return (
         <Col
             lg={widthClassNames}
@@ -75,8 +80,8 @@ export function CardProduct({ product, widthClassNames }: cardProductProps) {
                 <span className="text-market">7x por {((product.price) / 7).toFixed(2)} sem juros</span>
                 <div className="d-flex align-items-center">
                     <span className="fs-5 fw-bolder me-2 text-market">R${product.price}</span>
-                    <Rating value={5} precision={0.1} size="small" readOnly />
-                    <span className="ms-1 fw-bolder text-market">(88)</span>
+                    <Rating value={Number(product.average_rating)} precision={0.1} size="small" readOnly />
+                    <span className="ms-1 fw-bolder text-market">({product.total_ratings})</span>
                 </div>
             </div>
         </Col>

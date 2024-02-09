@@ -12,5 +12,7 @@ export type ProductType = {
   image: string,
   user: User,
   shop: null
+  average_rating: string,
+  total_ratings: number,
   comments: Comments[],
 }
