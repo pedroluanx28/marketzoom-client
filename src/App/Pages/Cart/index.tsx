@@ -1,5 +1,6 @@
 import { useAuth } from "@/hooks/useAuth"
 import { useEffect, useState } from "react"
+import { Col, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 
 type product = {
@@ -22,6 +23,8 @@ type product = {
 export function Cart() {
     const { api } = useAuth();
     const [productsCart, setProductsCart] = useState([] as product[])
+    const [isLoading, setIsLoading] = useState(true);
+    const [totalValueCart, setTotalValueCart] = useState([] as number[]);
 
     const fetchData = async () => {
         try {
@@ -29,19 +32,20 @@ export function Cart() {
 
             console.log(data)
             setProductsCart(data)
+            setIsLoading(false);
         } catch (error) {
             console.error(error)
         }
     }
 
-    const deleteCartProduct = async (id: number) => {
+    const deleteCartItem = async (id: number) => {
         try {
             Swal.fire({
                 customClass: {
                     cancelButton: 'text-dark',
                 },
                 icon: 'question',
-                text: 'Você deseja excluir esse produto?',
+                text: 'Você deseja excluir um item deste produto?',
                 iconColor: '#9747FF',
                 confirmButtonText: "Sim",
                 cancelButtonColor: '#fff',
@@ -60,6 +64,64 @@ export function Cart() {
                 }
             })
         } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const addCartItem = async (id: number) => {
+        try {
+            Swal.fire({
+                customClass: {
+                    cancelButton: 'text-dark',
+                },
+                icon: 'question',
+                text: 'Você deseja adicionar um item deste produto?',
+                iconColor: '#9747FF',
+                confirmButtonText: "Sim",
+                cancelButtonColor: '#fff',
+                showCancelButton: true,
+                cancelButtonText: "Não",
+                focusCancel: false,
+                focusConfirm: false,
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await api.post(`/cart/add-item/${id}`, {
+                        'product_quantity': 1
+                    });
+                    location.reload();
+                }
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const deleteCartProduct = async (product: product) => {
+        try {
+            Swal.fire({
+                customClass: {
+                    cancelButton: 'text-dark',
+                },
+                icon: 'question',
+                text: 'Você deseja excluir esse produto?',
+                iconColor: '#9747FF',
+                confirmButtonText: "Sim",
+                cancelButtonColor: '#fff',
+                showCancelButton: true,
+                cancelButtonText: "Não",
+                focusCancel: false,
+                focusConfirm: false,
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await api.delete(`/cart/remove-item/${product.product_id}`, {
+                        data: {
+                            product_quantity: product.product_quantity
+                        }
+                    });
+                    location.reload();
+                }
+            })
+        } catch (error) {
             console.error(error);
         }
     }
@@ -69,17 +131,41 @@ export function Cart() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <div className="d-flex h-75 w-75 m-auto p-3 justify-content-center bg-white">
-            <div className="d-flex h-100 flex-column gap-3 align-items-center">
-                {productsCart.map((productCart) => (
-                    <div key={productCart.product.id}>
-                        <span>{productCart.product.name} </span>
-                        <span>{productCart.product_quantity} | </span>
-                        <span>{productCart.product.price * productCart.product_quantity}</span>
-                        <button onClick={() => deleteCartProduct(productCart.product.id)} className="ms-2 btn btn-danger fw-bold">Deletar</button>
-                    </div>
+        <div className="d-flex h-75 w-75 m-auto p-2 justify-content-center bg-white">
+            <Col className="gap-2" lg={8}>
+                {isLoading ? "Carregando..." : (
+                    productsCart.map((productCart) => (
+                        <Row key={productCart.product.id} className="d-flex">
+                            <Col lg={1}>
+                                <input type="checkbox" className="form-check-input" value={productCart.product_quantity * productCart.product.price} onClick={(e) => setTotalValueCart([...totalValueCart, Number(e.currentTarget.value)])} />
+                            </Col>
+                            <Col lg={2}>
+                                <img src={productCart.product.image} alt="sla" />
+                            </Col>
+                            <Col>
+                                <Row>
+                                    <span>{productCart.product.name} </span>
+                                    <span>{productCart.product_quantity} x {productCart.product.price}</span>
+                                </Row>
+                                <div className="d-flex">
+                                    <div className="d-flex align-items-center">
+                                        <span>Quan.:</span>
+                                        <button className="btn btn-bg-white-text-purple" onClick={() => deleteCartItem(productCart.product.id)}>-</button>
+                                        <input type="number" className="border border-0 text-center w-10" value={productCart.product_quantity} />
+                                        <button className="btn btn-bg-white-text-purple" onClick={() => addCartItem(productCart.product_id)}>+</button>
+                                    </div>
+                                    <button onClick={() => deleteCartProduct(productCart)} className="btn btn-danger fw-bold">Deletar</button>
+                                </div>
+                            </Col>
+                        </Row>
+                    ))
+                )}
+            </Col>
+            <Col>
+                {totalValueCart.map((value) => (
+                    <>{value}</>
                 ))}
-            </div>
+            </Col>
         </div>
     )
 }

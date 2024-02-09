@@ -13,6 +13,7 @@ import Logo from "@public/Logo.png";
 import { useAuth } from '@/hooks/useAuth';
 
 import './styles.scss';
+import { User } from '@/@types/user';
 
 type Product = {
     product: {
@@ -33,9 +34,11 @@ type Product = {
 
 export function Header() {
     const [cart, setCart] = useState([] as Product[]);
-    const { authenticated, currentAuth } = useContext(UserContext)
+    const { authenticated } = useContext(UserContext)
     const { api } = useAuth();
+    const [user, setUser] = useState({} as User)
     const navigate = useNavigate();
+
 
     const fetchCart = async () => {
         try {
@@ -83,9 +86,20 @@ export function Header() {
             accumulator + produto.product_quantity * produto.product.price, 0)
             .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
+    const fetchUser = async () => {
+        try {
+            const { data } = await api.get('/auth/user');
+
+            setUser(data.user)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     useEffect(() => {
+        fetchUser()
         fetchCart();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -110,7 +124,7 @@ export function Header() {
                 {localStorage.getItem('token') ? (
                     <a href="/user/profile">
                         <FaUserCircle className="fs-2" />
-                        <span className="ms-2">{currentAuth.username?.split(' ')[0]}</span>
+                        <span className="ms-2">{user?.username?.split(' ')[0]}</span>
                     </a>
                 ) : (
                     <a href="/auth/login">
