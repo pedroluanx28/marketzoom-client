@@ -6,17 +6,18 @@ import Row from 'react-bootstrap/Row';
 import { useAuth } from "@/hooks/useAuth";
 
 import { CardProduct } from "@/Components/Cards/CardProducts";
+import { ProductType } from "@/@types/Product";
 
 export function ProductsList() {
     const { search } = useParams();
     const { api } = useAuth();
 
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState<ProductType[]>([])
 
     const fetchData = async () => {
         try {
-            const response = await api.get('/products');
-            setProducts(response.data)
+            const { data } = await api.get(`/products/search/${search}`);
+            setProducts(data)
         } catch (error) {
             console.error(error);
         }
@@ -24,7 +25,8 @@ export function ProductsList() {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [search])
 
     return (
         <div className="overflow-auto py-4 px-3 h-88">

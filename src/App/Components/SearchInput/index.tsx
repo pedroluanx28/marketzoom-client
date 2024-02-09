@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import './styles.scss';
 
@@ -22,9 +22,9 @@ export function SearchInput() {
                 }
                 }
             />
-            <a href={search ?? `/products/${search}`}>
-                <button className="btn btn-bg-purple-text-white search-button"><IoSearch /></button>
-            </a>
+            <Link to={search ? `/products/${search}` : '/'}>
+                <button className="btn btn-bg-purple-text-white search-button" type="button"><IoSearch /></button>
+            </Link>
         </div>
     )
 }

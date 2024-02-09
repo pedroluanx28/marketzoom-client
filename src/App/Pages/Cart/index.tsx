@@ -30,7 +30,6 @@ export function Cart() {
         try {
             const { data } = await api.get('/cart')
 
-            console.log(data)
             setProductsCart(data)
             setIsLoading(false);
         } catch (error) {

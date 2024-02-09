@@ -100,10 +100,9 @@ export default function Product() {
           if (result.isConfirmed) {
             const addProductInCart = async () => {
               try {
-                const { data } = await api.post(`/cart/add-item/${id}`, {
+                await api.post(`/cart/add-item/${id}`, {
                   'product_quantity': quantity
                 })
-                console.log(data)
               } catch (error) {
                 console.error(error);
               }
