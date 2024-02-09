@@ -4,5 +4,6 @@ export type User = {
     shop_id: null,
     name: string,
     email: string,
-    profile: null
+    profile: null,
+    username: string
 }
