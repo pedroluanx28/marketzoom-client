@@ -12,7 +12,6 @@ import { useAuth } from "@/hooks/useAuth";
 
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Modal from "react-bootstrap/Modal";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -33,15 +32,11 @@ import { UserContext } from "@/Context/UserContext";
 export default function Product() {
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
-  const [payNow, setPayNow] = useState(false);
   const [product, setProduct] = useState({} as ProductType)
   const [ratingProduct, setRatingProduct] = useState(0)
   const { authenticated } = useContext(UserContext);
   const { api } = useAuth();
   const navigate = useNavigate()
-
-  const handleClose = () => setPayNow(false);
-  const handleShow = () => setPayNow(true);
 
   const handleQuantity = (e: string) => {
     if (e == "-") {
@@ -80,8 +75,7 @@ export default function Product() {
       })
 
       return;
-    }
-    else {
+    } else {
       Swal.fire({
         customClass: {
           cancelButton: 'text-dark',
@@ -109,10 +103,6 @@ export default function Product() {
             }
 
             addProductInCart()
-          } else if (String(result.dismiss) === "cancel") {
-              alert("ola")
-          } else {
-            return;
           }
         }
       })
@@ -191,7 +181,7 @@ export default function Product() {
               <button className="btn text-market" value="+" onClick={(e) => handleQuantity(e.currentTarget.value)}>+</button>
             </Col>
             <Col lg={9} className="pe-0">
-              <button className="btn btn-bg-white-text-purple w-100" onClick={handleShow}>Comprar agora</button>
+              <button className="btn btn-bg-white-text-purple w-100">Comprar agora</button>
             </Col>
           </Row>
           <Row lg={12}>
@@ -238,18 +228,6 @@ export default function Product() {
           </Row>
         </div>
       </div>
-      <Modal show={payNow} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Caloteiro</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Paga logo isso enfiiz</Modal.Body>
-        <Modal.Footer>
-          <button className="btn btn-primary" onClick={handleClose}>
-            Fechar
-          </button>
-
-        </Modal.Footer>
-      </Modal>
     </div>
   )
 }

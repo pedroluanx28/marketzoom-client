@@ -2,6 +2,12 @@ import { useAuth } from "@/hooks/useAuth"
 import { FormEvent, useEffect, useState } from "react"
 import { Col, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
+import { convertToBRL } from '@/utils/convertToBRL';
+
+import ProductImage from '@public/produto.svg';
+import Spinner from "react-bootstrap/Spinner";
+
+import './styles.scss';
 
 type product = {
     product: {
@@ -24,6 +30,7 @@ export function Cart() {
     const { api } = useAuth();
     const [productsCart, setProductsCart] = useState([] as product[])
     const [isLoading, setIsLoading] = useState(true);
+    const [isChangingQuantity, setIsChangingQuantity] = useState(false);
     const [totalValueCart, setTotalValueCart] = useState([] as number[]);
 
     const fetchData = async () => {
@@ -32,6 +39,7 @@ export function Cart() {
 
             setProductsCart(data)
             setIsLoading(false);
+            setIsChangingQuantity(false);
         } catch (error) {
             console.error(error)
         }
@@ -59,7 +67,7 @@ export function Cart() {
                             product_quantity: 1
                         }
                     });
-                    location.reload();
+                    setIsChangingQuantity(true);
                 }
             })
         } catch (error) {
@@ -87,7 +95,7 @@ export function Cart() {
                     await api.post(`/cart/add-item/${id}`, {
                         'product_quantity': 1
                     });
-                    location.reload();
+                    setIsChangingQuantity(true);
                 }
             })
         } catch (error) {
@@ -117,7 +125,6 @@ export function Cart() {
                             product_quantity: product.product_quantity
                         }
                     });
-                    location.reload();
                 }
             })
         } catch (error) {
@@ -147,44 +154,61 @@ export function Cart() {
     useEffect(() => {
         fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [addCartItem, deleteCartItem]);
+
     return (
-        <div className="d-flex h-75 w-75 m-auto p-2 justify-content-center bg-white">
-            <Col className="gap-2" lg={8}>
+        <Row className="w-100 container py-3">
+            <Col lg={8}>
                 {isLoading ? "Carregando..." : (
-                    productsCart.map((productCart) => (
-                        <Row key={productCart.product.id} className="d-flex">
-                            <Col lg={1}>
-                                <input type="checkbox" className="form-check-input" value={productCart.product_quantity * productCart.product.price} onClick={(e) => e.currentTarget.checked ? updateTotalCartValue(e) : deleteTotalCartValue(e)} />
-                            </Col>
-                            <Col lg={2}>
-                                <img src={productCart.product.image} alt="sla" />
-                            </Col>
-                            <Col>
-                                <Row>
-                                    <span>{productCart.product.name} </span>
-                                    <span>{productCart.product_quantity} x {productCart.product.price}</span>
-                                </Row>
+                    productsCart.map((productCart, index) => (
+                        <div key={`product-${index}`} className="d-flex align-items-center product-card-container">
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                                value={productCart.product_quantity * productCart.product.price}
+                                onClick={(event) =>
+                                    event.currentTarget.checked
+                                        ? updateTotalCartValue(event)
+                                        : deleteTotalCartValue(event)
+                                }
+                            />
+
+                            {/* <img src={ProductImage} alt="Product image" className="product-image" /> */}
+                            <img src="https://cdn.topmidianews.com.br/upload/dn_noticia/2018/06/34633227-2012674279047650-3461198355823067136-n.jpg" alt="Product image" className="product-image" />
+
+                            <div className="d-flex flex-column">
+                                <a href={`/product/${productCart.product_id}`}>{productCart.product.name}</a>
+                                <span>{convertToBRL(productCart.product.price)}</span>
+                            </div>
+
+                            <div className="d-flex align-items-center">
+                                <span className="me-2">Qntd.:</span>
+
                                 <div className="d-flex">
-                                    <div className="d-flex align-items-center">
-                                        <span>Quan.:</span>
-                                        <button className="btn btn-bg-white-text-purple" onClick={() => deleteCartItem(productCart.product.id)}>-</button>
-                                        <input type="number" className="border border-0 text-center w-10" value={productCart.product_quantity} />
-                                        <button className="btn btn-bg-white-text-purple" onClick={() => addCartItem(productCart.product_id)}>+</button>
-                                    </div>
-                                    <button onClick={() => deleteCartProduct(productCart)} className="btn btn-danger fw-bold">Deletar</button>
+                                    <button className="btn btn-bg-white-text-purple button-less" onClick={() => deleteCartItem(productCart.product.id)}>-</button>
+                                    {isChangingQuantity ? (
+                                        <div className="bg-white d-flex align-items-center">
+                                            <Spinner size="sm" />
+                                        </div>
+                                    ) : (
+                                        <input type="number" value={productCart.product_quantity} className="product-quantity-input" />
+                                    )}
+                                    <button className="btn btn-bg-white-text-purple button-more" onClick={() => addCartItem(productCart.product.id)}>+</button>
                                 </div>
-                            </Col>
-                        </Row>
+                            </div>
+                            <div className="d-flex flex-column">
+                                <span>Sub-total:</span>
+                                <span className="sub-total">{convertToBRL(productCart.product.price * productCart.product_quantity)}</span>
+                            </div>
+
+                            <button className="btn delete-button" onClick={() => deleteCartProduct}>Deletar</button>
+                        </div>
                     ))
                 )}
             </Col>
             <Col>
-                {/* {totalValueCart.map((value) => (
-                    <>{value}</>
-                ))} */}
                 {sumCartPrice}
             </Col>
-        </div>
+        </Row>
     )
 }

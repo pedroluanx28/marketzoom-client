@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ProductType } from '@/@types/Product';
 import Col from 'react-bootstrap/Col';
 
@@ -6,9 +6,10 @@ import image from "@public/produto.svg";
 import { useNavigate } from 'react-router-dom';
 import { Rating } from '@mui/material';
 import Swal from 'sweetalert2';
+import { UserContext } from '@/Context/UserContext';
+import { useAuth } from '@/hooks/useAuth';
 
 import './styles.scss';
-import { UserContext } from '@/Context/UserContext';
 
 type cardProductProps = {
     product: ProductType;
@@ -17,6 +18,7 @@ type cardProductProps = {
 
 export function CardProduct({ product, widthClassNames }: cardProductProps) {
     const navigate = useNavigate();
+    const { api } = useAuth();
     const { authenticated } = useContext(UserContext);
     const [addCart, setAddCart] = useState(false);
 
@@ -51,6 +53,37 @@ export function CardProduct({ product, widthClassNames }: cardProductProps) {
             })
 
             return;
+        } else {
+            Swal.fire({
+                customClass: {
+                    cancelButton: 'text-dark',
+                },
+                icon: 'question',
+                text: 'Deseja adicionar este item ao seu carrinho?',
+                iconColor: '#9747FF',
+                confirmButtonText: "Adicionar ao carrinho",
+                cancelButtonColor: '#fff',
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                focusCancel: false,
+                focusConfirm: false,
+            }).then((result) => {
+                if (result) {
+                    if (result.isConfirmed) {
+                        const addProductInCart = async () => {
+                            try {
+                                await api.post(`/cart/add-item/${product.id}`, {
+                                    'product_quantity': 1
+                                })
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }
+
+                        addProductInCart()
+                    }
+                }
+            })
         }
     }
 
