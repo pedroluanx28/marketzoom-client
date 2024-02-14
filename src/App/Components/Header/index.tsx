@@ -124,7 +124,7 @@ export function Header() {
                 {sessionStorage.getItem('token') ? (
                     <a href="/user/profile">
                         <FaUserCircle className="fs-2" />
-                        <span className="ms-2">{user?.username?.split(' ')[0]}</span>
+                        <span>{user?.username?.split(' ')[0]}</span>
                     </a>
                 ) : (
                     <a href="/auth/login">

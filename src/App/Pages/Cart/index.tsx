@@ -4,7 +4,6 @@ import { Col, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { convertToBRL } from '@/utils/convertToBRL';
 
-import ProductImage from '@public/produto.svg';
 import Spinner from "react-bootstrap/Spinner";
 
 import './styles.scss';
@@ -154,11 +153,11 @@ export function Cart() {
     useEffect(() => {
         fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [addCartItem, deleteCartItem]);
+    }, []);
 
     return (
-        <Row className="w-100 container py-3">
-            <Col lg={8}>
+        <Row className="py-3 h-88 container">
+            <Col lg={8} className="overflow-y-scroll h-100">
                 {isLoading ? "Carregando..." : (
                     productsCart.map((productCart, index) => (
                         <div key={`product-${index}`} className="d-flex align-items-center product-card-container">
@@ -206,7 +205,7 @@ export function Cart() {
                     ))
                 )}
             </Col>
-            <Col>
+            <Col lg={3}>
                 {sumCartPrice}
             </Col>
         </Row>
